@@ -20,6 +20,7 @@
                     <p>
                         <label for="idFrais">{{ visiteur.LIBELLE }}</label>
                         <input type="text" id="idFrais" name="montant" size="10" maxlength="5">
+                        <input type="hidden" name="idFraisForfait" value={{visiteur.ID}} />
                     </p>
 				{% endfor %}
 
