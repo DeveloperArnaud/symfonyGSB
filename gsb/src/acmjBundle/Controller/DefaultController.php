@@ -27,7 +27,7 @@ class DefaultController extends Controller
         $db = $this->get('gsb.pdo');
         $service = new GSBPdoService($db);
 
-        $lesVisiteurs = $service->getLesVisiteurs();
+        $lesVisiteurs = $service->getLesFraisForfaits();
 
         return $this->render('@acmj/Default/FicheFrais.html.twig', array('fraishorsforfaits'=>$lignefhf,'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs));
         }
