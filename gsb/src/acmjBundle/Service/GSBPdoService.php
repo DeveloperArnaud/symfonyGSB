@@ -23,10 +23,10 @@ class GSBPdoService
         self::$db->query("SET CHARACTER SET utf8");
     }
 
-    public function getLesVisiteurs() {
+    public function getLesFraisForfaits() {
         $stmt= self::$db->query('SELECT * from fraisForfait');
-        $lesV = $stmt->fetchAll();
-        return $lesV;
+        $lesFF = $stmt->fetchAll();
+        return $lesFF;
     }
 
 }
