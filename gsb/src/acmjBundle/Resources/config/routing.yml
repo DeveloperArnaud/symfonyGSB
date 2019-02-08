@@ -1,0 +1,16 @@
+acmj_login:
+    path:     /login
+    defaults: { _controller: acmjBundle:Security:login }
+acmj_accueil_visiteur:
+    path:     /accueil
+    defaults: { _controller: acmjBundle:Default:index }
+acmj_logout:
+    path:   /logout
+
+acmj_fichefrais:
+    path:   /accueil/ficheFrais/{id}
+    defaults: { _controller: acmjBundle:Default:FicheFrais }
+
+
+
+

@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+{% block menu %}
+    <div id="menuGauche">
+        <div id="infosUtil">
+            <h3>
+                {%if app.user.nom %}
+                    Visiteur:{{app.user.nom}} {{app.user.prenom}}<br>
+                {%endif%}
+            </h3>
+        </div>
+        <ul id="menuList">
+            {% if app.user.comptable == false %}
+                <li class="smenu">
+                    <a href="{{ path('acmj_saisirFicheFrais') }}" title="Saisir une fiche de frais ">Saisie fiche de frais</a>
+                </li>
+            {% endif %}
+            {% if app.user.comptable == false %}
+                <li class="smenu">
+                    <a href="#" title="Consultation de mes fiches de frais">Mes fiches de frais</a>
+                </li>
+            {% endif %}
+            <li class="smenu">
+                <a href="{{ path('acmj_logout') }}" title="Se déconnecter">Déconnexion</a>
+            </li>
+            {% if app.user.comptable == true %}
+                <li class="smenu">
+                    <a href="#" title="valider les frais">Valider les frais</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+{% endblock%}

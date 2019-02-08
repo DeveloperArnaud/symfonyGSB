@@ -1,0 +1,17 @@
+imports:
+  - { resource: "parameters.yml"}
+
+
+services:
+#    acmj.example:
+#        class: acmjBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+
+    gsb.pdo:
+      class: PDO
+      arguments:
+        - %database_dsn%
+        - %database_user%
+        - %database_password%
+        - %pdo.options%

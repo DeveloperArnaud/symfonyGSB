@@ -1,0 +1,8 @@
+parameters:
+    database_dsn: mysql:host=127.0.0.1;dbname=gsbsymfony
+    database_user: root
+    database_password:
+    pdo.attr_erromode: 3
+    pdo.erromode_exception: 2
+    pdo.options:
+        %pdo.attr_erromode%: %pdo.erromode_exception%

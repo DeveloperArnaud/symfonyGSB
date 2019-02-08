@@ -1,0 +1,97 @@
+{% extends "base.html.twig" %}
+{% block menu %}
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+    <div id="contenu">
+        <h2>Renseigner ma fiche de frais du mois <?php echo $numMois."-".$numAnnee ?></h2>
+
+        <form method="POST"  action="{{ path('acmj_fichefrais') }}">
+            <div class="corpsForm">
+
+                <fieldset>
+                    <legend>Eléments forfaitisés
+
+                    </legend>
+
+
+				{% for visiteur in visiteurs %}
+
+                    <p>
+                        <label for="idFrais">{{ visiteur.LIBELLE }}</label>
+                        <input type="text" id="idFrais" name="montant" size="10" maxlength="5">
+                    </p>
+				{% endfor %}
+
+        </form>
+
+
+
+
+
+        </fieldset>
+    </div>
+    <div class="piedForm">
+        <p>
+            <input id="ok" type="submit" value="Valider" size="20" />
+            <input id="annuler" type="reset" value="Effacer" size="20" />
+        </p>
+    </div>
+
+    </form>
+
+    <table class="listeLegere">
+        <caption>Descriptif des éléments hors forfait
+        </caption>
+        <tr>
+            <th class="date">Date</th>
+            <th class="libelle">Libellé</th>
+            <th class="montant">Montant</th>
+            <th class="action">&nbsp;</th>
+        </tr>
+        {% for fraishorsforfait in fraishorsforfaits %}
+        <tr>
+            <td> {{ fraishorsforfait.date }}</td>
+            <td><{{ fraishorsforfait.libelle }}</td>
+            <td>{{ fraishorsforfait.montant }}</td>
+            <td><a href="index.php?uc=gererFrais&action=supprimerFrais&idFrais=<?php echo $id ?>"
+                   onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">Supprimer ce frais</a></td>
+        </tr>
+
+	 {% endfor %}
+
+    </table>
+    <form action="index.php?uc=gererFrais&action=validerCreationFrais" method="post">
+        <div class="corpsForm">
+
+            <fieldset>
+                <legend>Nouvel élément hors forfait
+                </legend>
+                <p>
+                    <label for="txtDateHF">Date (jj/mm/aaaa): </label>
+                    <input type="text" id="txtDateHF" name="dateFrais" size="10" maxlength="10" value=""  />
+                </p>
+                <p>
+                    <label for="txtLibelleHF">Libellé</label>
+                    <input type="text" id="txtLibelleHF" name="libelle" size="70" maxlength="256" value="" />
+                </p>
+                <p>
+                    <label for="txtMontantHF">Montant : </label>
+                    <input type="text" id="txtMontantHF" name="montant" size="10" maxlength="10" value="" />
+                </p>
+            </fieldset>
+        </div>
+        <div class="piedForm">
+            <p>
+                <input id="ajouter" type="submit" value="Ajouter" size="20" />
+                <input id="effacer" type="reset" value="Effacer" size="20" />
+            </p>
+        </div>
+
+    </form>
+    </div>
+
+
+
+{% endblock %}
+  
