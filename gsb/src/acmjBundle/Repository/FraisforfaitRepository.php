@@ -13,6 +13,12 @@ use acBundle\Entity\CorpsMetierRecherche;
 class FraisForfaitRepository extends \Doctrine\ORM\EntityRepository
 {
 
+    public function getLesFraisForfaits() {
+        $stmt= self::$db->query('SELECT * from fraisforfait');
+        $lesFF = $stmt->fetchAll();
+        return $lesFF;
+    }
+
 
 
 }

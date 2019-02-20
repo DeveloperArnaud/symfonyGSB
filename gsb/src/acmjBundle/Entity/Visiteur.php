@@ -23,13 +23,6 @@ class Visiteur implements UserInterface,\Serializable
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="ID_GERER", type="integer", nullable=false)
-     */
-    private $idGerer;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="NOMVISITEUR", type="string", length=128, nullable=true)
@@ -85,28 +78,26 @@ class Visiteur implements UserInterface,\Serializable
      */
     private $dateembauche;
 
-
     /**
-     * @var \boolean
+     * @var boolean
      *
-     * @ORM\Column(name="comptable", type="boolean", nullable=true)
+     * @ORM\Column(name="COMPTABLE", type="boolean", nullable=true)
      */
     private $comptable;
 
-
     /**
-     * String representation of object
-     * @link https://php.net/manual/en/serializable.serialize.php
-     * @return string the string representation of the object or null
-     * @since 5.1.0
+     * @var integer
+     *
+     * @ORM\Column(name="ID_GERER", type="integer", nullable=false)
      */
+    private $idGerer;
+
+
     public function setUsername($loginvisiteur)
     {
         $this->loginvisiteur = $loginvisiteur;
-
         return $this;
     }
-
     /**
      * Get username
      *
@@ -116,7 +107,6 @@ class Visiteur implements UserInterface,\Serializable
     {
         return $this->loginvisiteur;
     }
-
     /**
      * Set password
      *
@@ -127,10 +117,8 @@ class Visiteur implements UserInterface,\Serializable
     public function setPassword($mdpvisiteur)
     {
         $this->mdpvisiteur = $mdpvisiteur;
-
         return $this;
     }
-
     /**
      * Get password
      *
@@ -141,7 +129,9 @@ class Visiteur implements UserInterface,\Serializable
         return $this->mdpvisiteur;
     }
 
-    /**
+
+
+     /**
      * Returns the roles granted to the user.
      *
      *     public function getRoles()
@@ -157,21 +147,16 @@ class Visiteur implements UserInterface,\Serializable
      */
     public function getRoles()
     {
-
         if ($this->comptable == false) {
             return ['ROLE_USER'];
         } else {
             return ['ROLE_ADMIN'];
         }
     }
-
     public function setRoles ($roles) {
         $this->roles = $roles;
-
         return $this;
     }
-
-
     /**
      * Returns the salt that was originally used to encode the password.
      *
@@ -183,7 +168,6 @@ class Visiteur implements UserInterface,\Serializable
     {
         return null;
     }
-
     /**
      * Removes sensitive data from the user.
      *
@@ -194,7 +178,6 @@ class Visiteur implements UserInterface,\Serializable
     {
         // TODO: Implement eraseCredentials() method.
     }
-
     /**
      * String representation of object
      * @link https://php.net/manual/en/serializable.serialize.php
@@ -209,7 +192,6 @@ class Visiteur implements UserInterface,\Serializable
             $this->mdpvisiteur
         ]);
     }
-
     /**
      * Constructs the object
      * @link https://php.net/manual/en/serializable.unserialize.php
@@ -229,8 +211,6 @@ class Visiteur implements UserInterface,\Serializable
 
 
 
-
-
     /**
      * Get id
      *
@@ -239,30 +219,6 @@ class Visiteur implements UserInterface,\Serializable
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set idGerer
-     *
-     * @param integer $idGerer
-     *
-     * @return Visiteur
-     */
-    public function setIdGerer($idGerer)
-    {
-        $this->idGerer = $idGerer;
-
-        return $this;
-    }
-
-    /**
-     * Get idGerer
-     *
-     * @return integer
-     */
-    public function getIdGerer()
-    {
-        return $this->idGerer;
     }
 
     /**
@@ -479,5 +435,29 @@ class Visiteur implements UserInterface,\Serializable
     public function getComptable()
     {
         return $this->comptable;
+    }
+
+    /**
+     * Set idGerer
+     *
+     * @param integer $idGerer
+     *
+     * @return Visiteur
+     */
+    public function setIdGerer($idGerer)
+    {
+        $this->idGerer = $idGerer;
+
+        return $this;
+    }
+
+    /**
+     * Get idGerer
+     *
+     * @return integer
+     */
+    public function getIdGerer()
+    {
+        return $this->idGerer;
     }
 }

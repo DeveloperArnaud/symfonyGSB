@@ -9,6 +9,7 @@ use acmjBundle\Service\GSBPdoService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use acmjBundle\Entity\Lignefraisforfait;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class DefaultController extends Controller
 {
@@ -17,7 +18,7 @@ class DefaultController extends Controller
         return $this->render('@acmj/Default/index.html.twig');
     }
 
-    public function FicheFraisAction(Request $request, $id) {
+    public function fichefraisAction(Request $request, $id) {
 
         $repository = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Lignefraishorsforfait');
         $lignefhf = $repository->findAll();
@@ -29,16 +30,31 @@ class DefaultController extends Controller
 
         $lesVisiteurs = $service->getLesFraisForfaits();
 
+        $montant = $request->request->get('montant');
+        $idFraisForfait = $request->request->get('idFraisForfait');
+    
+        
+        if (!empty($montant)) {
+            $lignefraisForfait = new Lignefraisforfait();
+            $lignefraisForfait->setIdConcerner($idFraisForfait);
+            $lignefraisForfait->setIdVisiteur($id);
+            $lignefraisForfait->setQuantite($montant);
+            $lignefraisForfait->setDatemodification(new \DateTime('now'));
+            return $this->render('@acmj/Default/ajoutfraisforfait.html.twig', array('fraishorsforfaits'=>$lignefhf,'fraisforfaits'=>$fraisf,'montants'=>$montant));
+
+        } else {
+        
+
         return $this->render('@acmj/Default/FicheFrais.html.twig', array('fraishorsforfaits'=>$lignefhf,'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs));
         }
+    }
+
+    public function consulterFichefraisAction()
+    {
+        return $this->render('@acmj/Default/consulter_fiche_frais.html.twig');
+    }
 
 
-
-
-
-
-
-
-
-
+    
 }
+

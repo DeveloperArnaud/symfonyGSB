@@ -16,15 +16,16 @@ class GSBPdoService
     private $user;
     private $mdp;
     private static $db;
-
+    
 
     public function __construct(\PDO $pdo){
         self::$db =$pdo;
         self::$db->query("SET CHARACTER SET utf8");
     }
 
+
     public function getLesFraisForfaits() {
-        $stmt= self::$db->query('SELECT * from fraisForfait');
+        $stmt= self::$db->query('SELECT * from fraisforfait');
         $lesFF = $stmt->fetchAll();
         return $lesFF;
     }

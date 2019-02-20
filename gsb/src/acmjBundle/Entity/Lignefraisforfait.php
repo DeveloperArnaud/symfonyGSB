@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Lignefraisforfait
  *
- * @ORM\Table(name="lignefraisforfait", indexes={@ORM\Index(name="I_FK_LIGNEFRAISFORFAIT_FRAISFORFAIT", columns={"ID_CONCERNER"}), @ORM\Index(name="I_FK_LIGNEFRAISFORFAIT_ETAT", columns={"ID_ETRE"})})
+ * @ORM\Table(name="lignefraisforfait", indexes={@ORM\Index(name="I_FK_LIGNEFRAISFORFAIT_FRAISFORFAIT", columns={"ID_CONCERNER"}), @ORM\Index(name="I_FK_LIGNEFRAISFORFAIT_VISITEUR", columns={"ID_VISITEUR"}), @ORM\Index(name="lignefraisforfait_ibfk_1", columns={"ID_VISITEUR", "DATEMODIFICATION"})})
  * @ORM\Entity
  */
 class Lignefraisforfait
@@ -29,11 +29,11 @@ class Lignefraisforfait
     private $idConcerner;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="ID_ETRE", type="smallint", nullable=false)
+     * @ORM\Column(name="ID_VISITEUR", type="string", length=128, nullable=false)
      */
-    private $idEtre;
+    private $idVisiteur;
 
     /**
      * @var integer
@@ -86,27 +86,27 @@ class Lignefraisforfait
     }
 
     /**
-     * Set idEtre
+     * Set idVisiteur
      *
-     * @param integer $idEtre
+     * @param string $idVisiteur
      *
      * @return Lignefraisforfait
      */
-    public function setIdEtre($idEtre)
+    public function setIdVisiteur($idVisiteur)
     {
-        $this->idEtre = $idEtre;
+        $this->idVisiteur = $idVisiteur;
 
         return $this;
     }
 
     /**
-     * Get idEtre
+     * Get idVisiteur
      *
-     * @return integer
+     * @return string
      */
-    public function getIdEtre()
+    public function getIdVisiteur()
     {
-        return $this->idEtre;
+        return $this->idVisiteur;
     }
 
     /**
@@ -156,5 +156,4 @@ class Lignefraisforfait
     {
         return $this->datemodification;
     }
-
 }

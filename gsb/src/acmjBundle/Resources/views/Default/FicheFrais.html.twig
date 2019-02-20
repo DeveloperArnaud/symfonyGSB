@@ -1,8 +1,34 @@
 {% extends "base.html.twig" %}
-{% block menu %}
-    {{ parent() }}
-{% endblock %}
 {% block body %}
+ <div id="menuGauche">
+        <div id="infosUtil">
+            <h3>
+                {%if app.user.id %}
+                    Visiteur:{{app.user.nomVisiteur}} {{app.user.prenomVisiteur}}<br>
+                {%endif%}
+            </h3>
+        </div>
+        <ul id="menuList">
+            {% if app.user.comptable == false %}
+                <li class="smenu">
+                    <a href={{ path('acmj_fichefrais', {id : app.user.id}) }} title="Saisir une fiche de frais ">Saisie fiche de frais</a>
+                </li>
+            {% endif %}
+            {% if app.user.comptable == false %}
+                <li class="smenu">
+                    <a href={{path('acmj_consulter_fichefrais')}} title="Consultation de mes fiches de frais">Mes fiches de frais</a>
+                </li>
+            {% endif %}
+            <li class="smenu">
+                <a href="{{ path('acmj_logout') }}" title="Se déconnecter">Déconnexion</a>
+            </li>
+            {% if app.user.comptable == true %}
+                <li class="smenu">
+                    <a href="#" title="valider les frais">Valider les frais</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
     <div id="contenu">
         <h2>Renseigner ma fiche de frais du mois <?php echo $numMois."-".$numAnnee ?></h2>
 
@@ -10,26 +36,18 @@
             <div class="corpsForm">
 
                 <fieldset>
-                    <legend>Eléments forfaitisés
-
-                    </legend>
+                    <legend>Eléments forfaitisés</legend>
 
 
 				{% for visiteur in visiteurs %}
 
                     <p>
                         <label for="idFrais">{{ visiteur.LIBELLE }}</label>
-                        <input type="text" id="idFrais" name="montant" size="10" maxlength="5">
-                        <input type="hidden" name="idFraisForfait" value={{visiteur.ID}} />
+
+                        <input type="text" name="montant" size="10" maxlength="5">
+                        <input type="hidden" name="idFraisForfait" value={{visiteur.ID}} >
                     </p>
-				{% endfor %}
-
-        </form>
-
-
-
-
-
+                    {% endfor %}
         </fieldset>
     </div>
     <div class="piedForm">

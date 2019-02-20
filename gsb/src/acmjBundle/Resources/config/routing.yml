@@ -9,7 +9,13 @@ acmj_logout:
 
 acmj_fichefrais:
     path:   /accueil/ficheFrais/{id}
-    defaults: { _controller: acmjBundle:Default:FicheFrais }
+    defaults: { _controller: acmjBundle:Default:fichefrais }
+
+acmj_consulter_fichefrais:
+    path:   /accueil/consulter
+    defaults: { _controller: acmjBundle:Default:consulterFichefrais }
+
+
 
 
 
