@@ -16,11 +16,11 @@
             {% endif %}
             {% if app.user.comptable == false %}
                 <li class="smenu">
-                    <a href={{path('acmj_consulter_fichefrais')}} title="Consultation de mes fiches de frais">Mes fiches de frais</a>
+                    <a href={{ path('acmj_consulter_fichefrais', {id : app.user.id}) }} title="Consultation de mes fiches de frais">Mes fiches de frais</a>
                 </li>
             {% endif %}
             <li class="smenu">
-                <a href="{{ path('acmj_logout') }}" title="Se déconnecter">Déconnexion</a>
+                <a href={{ path('acmj_logout') }} title="Se déconnecter">Déconnexion</a>
             </li>
             {% if app.user.comptable == true %}
                 <li class="smenu">
@@ -30,7 +30,7 @@
         </ul>
     </div>
     <div id="contenu">
-        <h2>Renseigner ma fiche de frais du mois <?php echo $numMois."-".$numAnnee ?></h2>
+        <h2>Renseigner ma fiche de frais du mois actuel</h2>
 
         <form method="POST"  action={{ path('acmj_fichefrais', {id : app.user.id }) }}>
             <div class="corpsForm">
@@ -58,56 +58,54 @@
     </div>
     </form>
 
+
+
+
+    </table>
+            <h2>Renseigner les élements hors forfait </h2>
+    <form action="index.php?uc=gererFrais&action=validerCreationFrais" method="post">
+        <div class="corpsForm">
+            {{form_start(form)}}
+            <fieldset>
+                <legend>Nouvel élément hors forfait
+                </legend>
+                <p>
+                    <label for="txtDateHF">{{form_row(form.date)}} </label> 
+                    
+                   
+                </p>
+                 <p>
+                    <label for="txtDateHF">{{form_row(form.libelle)}} </label> 
+                </p>
+        {{form_end(form)}}
+        
+            </fieldset>
+        </div>
+
+
+    </form>
+
+    
     <table class="listeLegere">
-        <caption>Descriptif des éléments hors forfait
-        </caption>
+        <h2>Descriptif des éléments hors forfait
+        </h2>
         <tr>
             <th class="date">Date</th>
             <th class="libelle">Libellé</th>
             <th class="montant">Montant</th>
             <th class="action">&nbsp;</th>
         </tr>
-        {% for fraishorsforfait in fraishorsforfaits %}
+       {% for infoHF in infosHF %}
         <tr>
-            <td> {{ fraishorsforfait.date }}</td>
-            <td><{{ fraishorsforfait.libelle }}</td>
-            <td>{{ fraishorsforfait.montant }}</td>
-            <td><a href="index.php?uc=gererFrais&action=supprimerFrais&idFrais=<?php echo $id ?>"
-                   onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">Supprimer ce frais</a></td>
+            <td>{{ infoHF.DATE }} </td>
+            <td> {{ infoHF.LIBELLE }} </td>
+            <td> {{ infoHF.MONTANT }} </td>
+            <td><a href= {{path('acmj_suppression_fiche',{idFraisHF: infoHF.ID })}} onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">Supprimer</a></td>
         </tr>
-
-	 {% endfor %}
-
-    </table>
-    <form action="index.php?uc=gererFrais&action=validerCreationFrais" method="post">
-        <div class="corpsForm">
-
-            <fieldset>
-                <legend>Nouvel élément hors forfait
-                </legend>
-                <p>
-                    <label for="txtDateHF">Date (jj/mm/aaaa): </label>
-                    <input type="text" id="txtDateHF" name="dateFrais" size="10" maxlength="10" value=""  />
-                </p>
-                <p>
-                    <label for="txtLibelleHF">Libellé</label>
-                    <input type="text" id="txtLibelleHF" name="libelle" size="70" maxlength="256" value="" />
-                </p>
-                <p>
-                    <label for="txtMontantHF">Montant : </label>
-                    <input type="text" id="txtMontantHF" name="montant" size="10" maxlength="10" value="" />
-                </p>
-            </fieldset>
-        </div>
-        <div class="piedForm">
-            <p>
-                <input id="ajouter" type="submit" value="Ajouter" size="20" />
-                <input id="effacer" type="reset" value="Effacer" size="20" />
-            </p>
-        </div>
-
-    </form>
+         {% endfor %}
     </div>
+
+    
 
 
 

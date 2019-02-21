@@ -29,5 +29,16 @@ class GSBPdoService
         $lesFF = $stmt->fetchAll();
         return $lesFF;
     }
+    public function getLesInfos($id) {
+        $stmt= self::$db->query("SELECT * from fichefrais where ID_DECLARER='$id'");
+        $lesFF = $stmt->fetchAll();
+        return $lesFF;
+    }
+
+    public function getLesInfosHorsForfait() {
+        $stmt= self::$db->query("SELECT * from lignefraishorsforfait");
+        $lesFF = $stmt->fetchAll();
+        return $lesFF;
+    }
 
 }

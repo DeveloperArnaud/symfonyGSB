@@ -13,9 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 class Etat
 {
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="ID", type="smallint", nullable=false)
+     * @ORM\Column(name="ID", type="string", length=4, nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */

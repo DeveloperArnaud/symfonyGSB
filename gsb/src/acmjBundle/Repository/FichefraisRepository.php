@@ -11,10 +11,21 @@ class FichefraisRepository extends \Doctrine\ORM\EntityRepository
 {
     public function getLesMois() {
 
-    $query = $this->createQueryBuilder('m')
-    ->select("m.mois")
-    ->getQuery()
-    ->getResult();
+        $query = $this->createQueryBuilder('m')
+        ->select("m.mois")
+        ->getQuery()
+        ->getResult();
+    }
+
+    public function getInfos($mois) {
+
+        $query = $this->createQueryBuilder('m')
+                        ->select('m')
+                        ->where ('m.mois = :mois')
+                        ->setParameter('mois',$mois)
+                        ->getQuery();
+                       
+
     }
 
 

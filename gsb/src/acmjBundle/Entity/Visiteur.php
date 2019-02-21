@@ -85,12 +85,6 @@ class Visiteur implements UserInterface,\Serializable
      */
     private $comptable;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="ID_GERER", type="integer", nullable=false)
-     */
-    private $idGerer;
 
 
     public function setUsername($loginvisiteur)
@@ -437,32 +431,8 @@ class Visiteur implements UserInterface,\Serializable
         return $this->comptable;
     }
 
-    /**
-     * Set idGerer
-     *
-     * @param integer $idGerer
-     *
-     * @return Visiteur
-     */
-    public function setIdGerer($idGerer)
-    {
-        $this->idGerer = $idGerer;
-
-        return $this;
-    }
-
-    /**
-     * Get idGerer
-     *
-     * @return integer
-     */
-    public function getIdGerer()
-    {
-        return $this->idGerer;
-    }
-
     public function __toString()
     {
-        return "nom ". $this->nomvisiteur;
+        "nom ". $this->nomvisiteur;
     }
 }

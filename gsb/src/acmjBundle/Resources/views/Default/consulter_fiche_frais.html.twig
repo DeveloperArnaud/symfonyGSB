@@ -16,7 +16,7 @@
             {% endif %}
             {% if app.user.comptable == false %}
                 <li class="smenu">
-                    <a href={{path('acmj_consulter_fichefrais')}} title="Consultation de mes fiches de frais">Mes fiches de frais</a>
+                    <a href={{ path('acmj_consulter_fichefrais', {id :app.user.id}) }} title="Consultation de mes fiches de frais">Mes fiches de frais</a>
                 </li>
             {% endif %}
             <li class="smenu">
@@ -35,20 +35,40 @@
  <div id="contenu">
       <h2>Mes fiches de frais</h2>
       <h3>Mois à sélectionner : </h3>
-      <form action="index.php?uc=etatFrais&action=voirEtatFrais" method="post">
       <div class="corpsForm">
       {{form(form)}}
-         
-      
-	
       </div>
-      <div class="piedForm">
+      <div class="corpsForm">
+        {% if infos is defined %}
+      {% for info in infos %} 
+      <fieldset>
+      <legend> Votre fiche frais du mois {{ info.MOIS }}   </legend>
       <p>
-        <input id="ok" type="submit" value="Valider" size="20" />
-        <input id="annuler" type="reset" value="Effacer" size="20" />
-      </p> 
+      <label for="txtDATEHF"> Date de modification (jj/mm/aaaa): {{ info.DATEMODIF }} </label>
+      </p>
+       <p>
+      <label for="txtDATEHF"> Mois : {{ info.MOIS }} </label>
+      </p>
+        <p>
+      <label for="txtDATEHF"> Etat : {{ info.ID_ETRE2 }} </label>
+      </p>
+
+         <p>
+      <label for="txtDATEHF"> Justificatif(s): {{ info.NBJUSTIFICATIFS }} </label>
+      </p>
+
+        <p>
+      <label for="txtDATEHF"> Montant Total: {{ info.MONTANTVALIDE }}</label>
+      </p>
+     {% endfor %}
+
+
+      {% endif %}
+      </fieldset>
+   
       </div>
-        
-      </form>
-      {% endblock %}
+         {% endblock %}
+
+
+      
 

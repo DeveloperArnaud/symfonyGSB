@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Lignefraisforfait
  *
- * @ORM\Table(name="lignefraisforfait", indexes={@ORM\Index(name="I_FK_LIGNEFRAISFORFAIT_FRAISFORFAIT", columns={"ID_CONCERNER"}), @ORM\Index(name="I_FK_LIGNEFRAISFORFAIT_VISITEUR", columns={"ID_VISITEUR"}), @ORM\Index(name="lignefraisforfait_ibfk_1", columns={"ID_VISITEUR", "DATEMODIFICATION"})})
+ * @ORM\Table(name="lignefraisforfait", indexes={@ORM\Index(name="I_FK_LIGNEFRAISFORFAIT_FRAISFORFAIT", columns={"ID_CONCERNER"}), @ORM\Index(name="I_FK_LIGNEFRAISFORFAIT_ETAT", columns={"ID_ETRE"})})
  * @ORM\Entity
  */
 class Lignefraisforfait
@@ -29,11 +29,11 @@ class Lignefraisforfait
     private $idConcerner;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="ID_VISITEUR", type="string", length=128, nullable=false)
+     * @ORM\Column(name="ID_ETRE", type="smallint", nullable=false)
      */
-    private $idVisiteur;
+    private $idEtre;
 
     /**
      * @var integer
@@ -50,110 +50,5 @@ class Lignefraisforfait
     private $datemodification;
 
 
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set idConcerner
-     *
-     * @param string $idConcerner
-     *
-     * @return Lignefraisforfait
-     */
-    public function setIdConcerner($idConcerner)
-    {
-        $this->idConcerner = $idConcerner;
-
-        return $this;
-    }
-
-    /**
-     * Get idConcerner
-     *
-     * @return string
-     */
-    public function getIdConcerner()
-    {
-        return $this->idConcerner;
-    }
-
-    /**
-     * Set idVisiteur
-     *
-     * @param string $idVisiteur
-     *
-     * @return Lignefraisforfait
-     */
-    public function setIdVisiteur($idVisiteur)
-    {
-        $this->idVisiteur = $idVisiteur;
-
-        return $this;
-    }
-
-    /**
-     * Get idVisiteur
-     *
-     * @return string
-     */
-    public function getIdVisiteur()
-    {
-        return $this->idVisiteur;
-    }
-
-    /**
-     * Set quantite
-     *
-     * @param integer $quantite
-     *
-     * @return Lignefraisforfait
-     */
-    public function setQuantite($quantite)
-    {
-        $this->quantite = $quantite;
-
-        return $this;
-    }
-
-    /**
-     * Get quantite
-     *
-     * @return integer
-     */
-    public function getQuantite()
-    {
-        return $this->quantite;
-    }
-
-    /**
-     * Set datemodification
-     *
-     * @param \DateTime $datemodification
-     *
-     * @return Lignefraisforfait
-     */
-    public function setDatemodification($datemodification)
-    {
-        $this->datemodification = $datemodification;
-
-        return $this;
-    }
-
-    /**
-     * Get datemodification
-     *
-     * @return \DateTime
-     */
-    public function getDatemodification()
-    {
-        return $this->datemodification;
-    }
 }
+

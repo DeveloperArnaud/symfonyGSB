@@ -221,10 +221,9 @@ class Fichefrais
 
     public function __toString()
     {
-      
-        return $this->mois;
         
+            return $this->mois;
+        
+       
     }
-
-    
 }

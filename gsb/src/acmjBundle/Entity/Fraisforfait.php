@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Fraisforfait
  *
  * @ORM\Table(name="fraisforfait")
- * @ORM\Entity(repositoryClass="acmjBundle\Repository\FraisforfaitRepository")
+ * @ORM\Entity
  */
 class Fraisforfait
 {
@@ -36,67 +36,11 @@ class Fraisforfait
     private $montant;
 
 
-
-    /**
-     * Get id
-     *
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set libelle
-     *
-     * @param string $libelle
-     *
-     * @return Fraisforfait
-     */
-    public function setLibelle($libelle)
-    {
-        $this->libelle = $libelle;
-
-        return $this;
-    }
-
-    /**
-     * Get libelle
-     *
-     * @return string
-     */
-    public function getLibelle()
+    public function __toString()
     {
         return $this->libelle;
     }
 
-    /**
-     * Set montant
-     *
-     * @param string $montant
-     *
-     * @return Fraisforfait
-     */
-    public function setMontant($montant)
-    {
-        $this->montant = $montant;
 
-        return $this;
-    }
-
-    /**
-     * Get montant
-     *
-     * @return string
-     */
-    public function getMontant()
-    {
-        return $this->montant;
-    }
-
-    public function __toString()
-    {
-       return  "libelle" . $this->libelle;
-    }
 }
+
