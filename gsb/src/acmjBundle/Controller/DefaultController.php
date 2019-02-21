@@ -5,11 +5,14 @@ namespace acmjBundle\Controller;
 use acmjBundle\Entity\Fraisforfait;
 use acmjBundle\Form\FraisforfaitType;
 use acmjBundle\Form\LignefraisforfaitType;
+use acmjBundle\Form\FichefraisType;
 use acmjBundle\Service\GSBPdoService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use acmjBundle\Entity\Lignefraisforfait;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use acmjBundle\Entity\Fichefrais;
 
 class DefaultController extends Controller
 {
@@ -51,8 +54,12 @@ class DefaultController extends Controller
 
     public function consulterFichefraisAction()
     {
-        return $this->render('@acmj/Default/consulter_fiche_frais.html.twig');
+        $fichefrais = new Fichefrais();
+    
+        $form = $this->createForm(FichefraisType::class);
+        return $this->render('@acmj/Default/consulter_fiche_frais.html.twig', array('form'=> $form->createView()));
     }
+        
 
 
     

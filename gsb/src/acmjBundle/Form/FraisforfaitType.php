@@ -6,6 +6,7 @@ use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class FraisforfaitType extends AbstractType
 {
@@ -14,7 +15,10 @@ class FraisforfaitType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('libelle')->add('montant');
+        $builder->add('libelle', EntityType::class, array (
+            'label' => 'libelle',
+            'class' => 'acmjBundle:Fraisforfait'
+        ))->add('montant');
     }/**
      * {@inheritdoc}
      */

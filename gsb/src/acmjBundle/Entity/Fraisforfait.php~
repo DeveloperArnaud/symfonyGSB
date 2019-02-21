@@ -97,6 +97,6 @@ class Fraisforfait
 
     public function __toString()
     {
-       return  "libelle" . $this->libelle;
+        "libelle" +$this->libelle;
     }
 }

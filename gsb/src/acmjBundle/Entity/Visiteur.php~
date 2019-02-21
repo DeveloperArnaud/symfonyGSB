@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * Visiteur
  *
  * @ORM\Table(name="visiteur", indexes={@ORM\Index(name="I_FK_VISITEUR_COMPTABLE", columns={"ID_GERER"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="acmjBundle\Repository\VisiteurRepository")
  */
 class Visiteur implements UserInterface,\Serializable
 {
@@ -459,5 +459,10 @@ class Visiteur implements UserInterface,\Serializable
     public function getIdGerer()
     {
         return $this->idGerer;
+    }
+
+    public function __toString()
+    {
+        "nom ". $this->nomvisiteur;
     }
 }
