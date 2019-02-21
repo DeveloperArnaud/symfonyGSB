@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
 
 class LignefraishorsforfaitType extends AbstractType
 {
@@ -14,7 +15,7 @@ class LignefraishorsforfaitType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('libelle')->add('date')->add('montant')->add ('save', SubmitType::class, array ('label'=> 'Valider'));
+        $builder->add('libelle')->add('date')->add('montant')->add ('save', SubmitType::class, array ('label'=> 'Valider'))->add ('reset', ResetType::class, array ('label'=> 'Effacer'));
     }/**
      * {@inheritdoc}
      */

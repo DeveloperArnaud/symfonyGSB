@@ -3,9 +3,9 @@
  <div id="menuGauche">
         <div id="infosUtil">
             <h3>
-                {%if app.user.id %}
+                {% if app.user.id %}
                     Visiteur:{{app.user.nomVisiteur}} {{app.user.prenomVisiteur}}<br>
-                {%endif%}
+                {% endif %}
             </h3>
         </div>
         <ul id="menuList">
@@ -32,7 +32,7 @@
     <div id="contenu">
         <h2>Renseigner ma fiche de frais du mois actuel</h2>
 
-        <form method="POST"  action={{ path('acmj_fichefrais', {id : app.user.id }) }}>
+        <form method="POST"  action={{ path('acmj_test_insert', {id : app.user.id }) }}>
             <div class="corpsForm">
 
                 <fieldset>
@@ -63,9 +63,10 @@
 
     </table>
             <h2>Renseigner les élements hors forfait </h2>
-    <form action="index.php?uc=gererFrais&action=validerCreationFrais" method="post">
-        <div class="corpsForm">
             {{form_start(form)}}
+    <form>
+        <div class="corpsForm">
+            
             <fieldset>
                 <legend>Nouvel élément hors forfait
                 </legend>
@@ -77,13 +78,24 @@
                  <p>
                     <label for="txtDateHF">{{form_row(form.libelle)}} </label> 
                 </p>
-        {{form_end(form)}}
+                <p>
+                    <label for="txtDateHF">{{form_row(form.montant)}} </label> 
+                </p>
+        
         
             </fieldset>
         </div>
+  <div class="piedForm">
+        <p>
+            {{form_row(form.save)}}
+            {{form_row(form.reset)}}
+        </p>
 
-
+  </div>
     </form>
+      {{form_end(form)}}
+
+  
 
     
     <table class="listeLegere">

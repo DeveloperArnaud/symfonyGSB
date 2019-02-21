@@ -19,6 +19,11 @@ acmj_suppression_fiche:
     path:   /accueil/suppression{idFraisHF}
     defaults: { _controller: acmjBundle:Default:suppressionFraisHF }
 
+acmj_test_insert:
+    path:   /accueil/test/{id}
+    defaults: { _controller: acmjBundle:Default:test }
+
+
 
 
 

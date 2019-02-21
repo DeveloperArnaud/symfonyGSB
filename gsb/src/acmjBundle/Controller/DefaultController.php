@@ -23,14 +23,17 @@ class DefaultController extends Controller
         return $this->render('@acmj/Default/index.html.twig');
     }
 
-    public function fichefraisAction(Request $request, $id) {
+    public function fichefraisAction(Request $request) {
 
         $repository = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Fraisforfait');
         $fraisf = $repository->findAll();
 
         $db = $this->get('gsb.pdo');
         $service = new GSBPdoService($db);
+
         
+        
+
 
         $form = $this->createForm(LignefraishorsforfaitType::class);
         $form->handleRequest($request);
@@ -79,6 +82,11 @@ class DefaultController extends Controller
         return $this->render('@acmj/Default/consulter_fiche_frais.html.twig',array('form'=>$form->createView()));
     
         
+    }
+
+
+    public function testAction(Request $request) {
+
     }
         
 
