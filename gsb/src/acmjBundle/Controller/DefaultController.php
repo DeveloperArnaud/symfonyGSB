@@ -32,7 +32,7 @@ class DefaultController extends Controller
         $service = new GSBPdoService($db);
         
 
-
+        $form2 =$this->createForm(LignefraisforfaitType::class);
         $form = $this->createForm(LignefraishorsforfaitType::class);
         $form->handleRequest($request);
         if ($form->isValid() && $form->isSubmitted()) {
@@ -64,12 +64,60 @@ class DefaultController extends Controller
             $lesVisiteurs = $service->getLesFraisForfaits();
             $lesInfosHorsforfaits = $service->getLesInfosHorsForfait();
             $message ="Le frais a bien été ajouté";
-            return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits,'messageFrais'=>$message));
+            return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits,'messageFrais'=>$message,'formF'=>$form2->createView()));
+        }
+
+        elseif ($form2->isValid() && $form2->isSubmitted()) {
+            $montantETP = $form2["ETP"]->getData();
+            $montantKM = $form2["KM"]->getData();
+            $montantNUI = $form2["NUI"]->getData();
+            $montantREP = $form2["REP"]->getData();
+
+            $lignefraisForfaitETP = new Lignefraisforfait();
+
+            $lignefraisForfaitETP->setIdConcerner('ETP');
+            $lignefraisForfaitETP->setDatemodification(new DateTime('now'));
+            $lignefraisForfaitETP->setIdEtre('CR');
+            $lignefraisForfaitETP->setQuantite($montantETP);
+
+            $lignefraisForfaitKM = new Lignefraisforfait();
+
+            $lignefraisForfaitKM->setIdConcerner('KM');
+            $lignefraisForfaitKM->setDatemodification(new DateTime('now'));
+            $lignefraisForfaitKM->setIdEtre('CR');
+            $lignefraisForfaitKM->setQuantite($montantKM);
+
+            $lignefraisForfaitNUI = new Lignefraisforfait();
+            
+            $lignefraisForfaitNUI->setIdConcerner('NUI');
+            $lignefraisForfaitNUI->setDatemodification(new DateTime('now'));
+            $lignefraisForfaitNUI->setIdEtre('CR');
+            $lignefraisForfaitNUI->setQuantite($montantNUI);
+
+            
+            $lignefraisForfaitREP = new Lignefraisforfait();
+            
+            $lignefraisForfaitREP->setIdConcerner('REP');
+            $lignefraisForfaitREP->setDatemodification(new DateTime('now'));
+            $lignefraisForfaitREP->setIdEtre('CR');
+            $lignefraisForfaitREP->setQuantite($montantREP);
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($lignefraisForfaitETP);
+            $em->persist($lignefraisForfaitKM);
+            $em->persist($lignefraisForfaitNUI);
+            $em->persist($lignefraisForfaitREP);
+            $em->flush();
+            $lesVisiteurs = $service->getLesFraisForfaits();
+            $lesInfosHorsforfaits = $service->getLesInfosHorsForfait();
+            $message ="Le frais a bien été ajouté";
+            return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits,'formF'=>$form2->createView()));
+            
         }
 
         $lesVisiteurs = $service->getLesFraisForfaits();
         $lesInfosHorsforfaits = $service->getLesInfosHorsForfait();
-        return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits));
+        return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits,'formF'=>$form2->createView()));
     }
 
     public function consulterFichefraisAction(Request $request,$id)

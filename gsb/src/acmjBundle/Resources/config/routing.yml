@@ -16,7 +16,7 @@ acmj_consulter_fichefrais:
     defaults: { _controller: acmjBundle:Default:consulterFichefrais }
 
 acmj_suppression_fiche:
-    path:   /accueil/suppression/{idFraisHF}
+    path:   /accueil/fichefrais/{idFraisHF}
     defaults: { _controller: acmjBundle:Default:suppressionFraisHF }
 
 acmj_test_insert:

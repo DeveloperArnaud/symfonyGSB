@@ -31,32 +31,42 @@
     </div>
     <div id="contenu">
         <h2>Renseigner ma fiche de frais du mois actuel</h2>
-
-        <form method="POST"  action={{ path('acmj_test_insert', {id : app.user.id }) }}>
+   {% if messageFrais is defined  %}
+                <div class ="erreur">
+                    <ul>{{messageFrais}}</ul></div>
+            {% endif %}
             <div class="corpsForm">
-
+                {{form_start(form)}}
                 <fieldset>
                     <legend>Eléments forfaitisés</legend>
-
-
-				{% for visiteur in visiteurs %}
-
                     <p>
-                        <label for="idFrais">{{ visiteur.LIBELLE }}</label>
-
-                        <input type="text" name="montant" size="10" maxlength="5" placeholder={{visiteur.MONTANT}}> €
-                        <input type="hidden" name="idFraisForfait" value={{visiteur.ID}} > 
+                        <label> {{form_row(formF.ETP)}}</label>
+                        </p>
+                         <p>
+                         <label> {{form_row(formF.KM)}}</label>
+                         </p>
+                          <p>
+                          <label> {{form_row(formF.NUI)}}</label>
+                          </p>
+                           <p>
+                           <label> {{form_row(formF.REP)}}</label>
                     </p>
-                    {% endfor %}
+
+
         </fieldset>
+       
     </div>
     <div class="piedForm">
         <p>
-            <input id="ok" type="submit" value="Valider" size="20" />
-            <input id="annuler" type="reset" value="Effacer" size="20" />
+        {{form_row(formF.save)}}
+
+        </p>
+        <p>
+        {{form_row(formF.reset)}}
         </p>
     </div>
-    </form>
+     {{form_end(formF)}}
+
 
 
 
