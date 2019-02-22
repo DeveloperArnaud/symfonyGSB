@@ -23,15 +23,13 @@ class DefaultController extends Controller
         return $this->render('@acmj/Default/index.html.twig');
     }
 
-    public function fichefraisAction(Request $request) {
+    public function fichefraisAction(Request $request,$id) {
 
         $repository = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Fraisforfait');
         $fraisf = $repository->findAll();
 
         $db = $this->get('gsb.pdo');
         $service = new GSBPdoService($db);
-
-        
         
 
 
@@ -51,13 +49,22 @@ class DefaultController extends Controller
             $fraishorsforfait->setDatemodif(new \DateTime('now'));
             $fraishorsforfait->setLibelle($libelle);
             $fraishorsforfait->setMontant($montant);
+            $fichefrais = new FicheFrais();
+            $fichefrais->setIdEtre2('CR')
+                        ->setIdDeclarer($id)
+                        ->setMois('201902')
+                        ->setNbjustificatifs(1)
+                        ->setMontantvalide($fraishorsforfait->getMontant())
+                        ->setDatemodif($fraishorsforfait->getDatemodif());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($fraishorsforfait);
+            $em->persist($fichefrais);
             $em->flush();
             $lesVisiteurs = $service->getLesFraisForfaits();
             $lesInfosHorsforfaits = $service->getLesInfosHorsForfait();
-            
-            return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits));
+            $message ="Le frais a bien été ajouté";
+            return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits,'messageFrais'=>$message));
         }
 
         $lesVisiteurs = $service->getLesFraisForfaits();
@@ -67,13 +74,12 @@ class DefaultController extends Controller
 
     public function consulterFichefraisAction(Request $request,$id)
     {
-    
+       $db = $this->get('gsb.pdo');
+            $service = new GSBPdoService($db);
         $form = $this->createForm(FichefraisType::class);
         $form->handleRequest($request);
-        if  ($form->isSubmitted()) {
-            $mois=$form["mois"]->getData();
-            $db = $this->get('gsb.pdo');
-            $service = new GSBPdoService($db);
+        if  ($form->isValid() && $form->isSubmitted()) {
+         
             $infosFiche = $service->getLesInfos($id);
             return $this->render('@acmj/Default/consulter_fiche_frais.html.twig', array('infos'=> $infosFiche,'form'=>$form->createView()));
             
@@ -85,7 +91,21 @@ class DefaultController extends Controller
     }
 
 
-    public function testAction(Request $request) {
+    public function suppressionFraisHFAction($idFraisHF) {
+        $repository = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Fraisforfait');
+        $fraisf = $repository->findAll();
+        $form = $this->createForm(LignefraishorsforfaitType::class);
+        $repository = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Lignefraishorsforfait');
+        $fraishorsforfait = $repository->find($idFraisHF);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($fraishorsforfait);
+        $em->flush();
+        $message ="Le frais a bien été supprimé";
+        $db = $this->get('gsb.pdo');
+        $service = new GSBPdoService($db);
+        $lesVisiteurs = $service->getLesFraisForfaits();
+        $lesInfosHorsforfaits = $service->getLesInfosHorsForfait();
+        return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits,"message"=>$message));
 
     }
         

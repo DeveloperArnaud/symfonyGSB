@@ -9,10 +9,12 @@ namespace acmjBundle\Repository;
  */
 class FichefraisRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getLesMois() {
+    public function getLesMois($idVisiteur) {
 
         $query = $this->createQueryBuilder('m')
         ->select("m.mois")
+        ->where('m.idDeclarer = :idVisiteur')
+        ->setParameter('idVisiteur',$idVisiteur)
         ->getQuery()
         ->getResult();
     }

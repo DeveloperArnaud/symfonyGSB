@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class LignefraishorsforfaitType extends AbstractType
 {
@@ -15,7 +16,7 @@ class LignefraishorsforfaitType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('libelle')->add('date')->add('montant')->add ('save', SubmitType::class, array ('label'=> 'Valider'))->add ('reset', ResetType::class, array ('label'=> 'Effacer'));
+        $builder->add('libelle',null,array('attr' => array('style' => 'width: 200px')))->add('date', DateType::class ,array ('years'=> range(2018,2019),'widget' => 'single_text','attr'=> array('style' => 'width : 200px') ))->add('montant',null,array('attr' => array('style' => 'width: 200px')))->add ('save', SubmitType::class, array ('label'=> 'Valider'))->add ('reset', ResetType::class, array ('label'=> 'Effacer'));
     }/**
      * {@inheritdoc}
      */

@@ -44,8 +44,8 @@
                     <p>
                         <label for="idFrais">{{ visiteur.LIBELLE }}</label>
 
-                        <input type="text" name="montant" size="10" maxlength="5">
-                        <input type="hidden" name="idFraisForfait" value={{visiteur.ID}} >
+                        <input type="text" name="montant" size="10" maxlength="5" placeholder={{visiteur.MONTANT}}> €
+                        <input type="hidden" name="idFraisForfait" value={{visiteur.ID}} > 
                     </p>
                     {% endfor %}
         </fieldset>
@@ -64,7 +64,10 @@
     </table>
             <h2>Renseigner les élements hors forfait </h2>
             {{form_start(form)}}
-    <form>
+   {% if messageFrais is defined  %}
+                <div class ="erreur">
+                    <ul>{{messageFrais}}</ul></div>
+            {% endif %}
         <div class="corpsForm">
             
             <fieldset>
@@ -79,7 +82,7 @@
                     <label for="txtDateHF">{{form_row(form.libelle)}} </label> 
                 </p>
                 <p>
-                    <label for="txtDateHF">{{form_row(form.montant)}} </label> 
+                    <label for="txtDateHF">{{form_row(form.montant)}}</label>
                 </p>
         
         
@@ -92,7 +95,6 @@
         </p>
 
   </div>
-    </form>
       {{form_end(form)}}
 
   
@@ -109,6 +111,11 @@
         </tr>
        {% for infoHF in infosHF %}
         <tr>
+         {% if message is defined  %}
+                <div class ="erreur">
+                    <ul>{{message}}</ul></div>
+            {% endif %}
+
             <td>{{ infoHF.DATE }} </td>
             <td> {{ infoHF.LIBELLE }} </td>
             <td> {{ infoHF.MONTANT }} </td>
