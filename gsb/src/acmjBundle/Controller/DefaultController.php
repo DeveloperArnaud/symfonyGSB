@@ -35,6 +35,7 @@ class DefaultController extends Controller
         $form2 =$this->createForm(LignefraisforfaitType::class);
         $form = $this->createForm(LignefraishorsforfaitType::class);
         $form->handleRequest($request);
+        $form2->handleRequest($request);
         if ($form->isValid() && $form->isSubmitted()) {
             $date = $form["date"]->getData();
             $libelle = $form["libelle"]->getData();
@@ -76,21 +77,21 @@ class DefaultController extends Controller
             $lignefraisForfaitETP = new Lignefraisforfait();
 
             $lignefraisForfaitETP->setIdConcerner('ETP');
-            $lignefraisForfaitETP->setDatemodification(new DateTime('now'));
+            $lignefraisForfaitETP->setDatemodification(new \DateTime('now'));
             $lignefraisForfaitETP->setIdEtre('CR');
             $lignefraisForfaitETP->setQuantite($montantETP);
 
             $lignefraisForfaitKM = new Lignefraisforfait();
 
             $lignefraisForfaitKM->setIdConcerner('KM');
-            $lignefraisForfaitKM->setDatemodification(new DateTime('now'));
+            $lignefraisForfaitKM->setDatemodification(new \DateTime('now'));
             $lignefraisForfaitKM->setIdEtre('CR');
             $lignefraisForfaitKM->setQuantite($montantKM);
 
             $lignefraisForfaitNUI = new Lignefraisforfait();
             
             $lignefraisForfaitNUI->setIdConcerner('NUI');
-            $lignefraisForfaitNUI->setDatemodification(new DateTime('now'));
+            $lignefraisForfaitNUI->setDatemodification(new \DateTime('now'));
             $lignefraisForfaitNUI->setIdEtre('CR');
             $lignefraisForfaitNUI->setQuantite($montantNUI);
 
@@ -98,7 +99,7 @@ class DefaultController extends Controller
             $lignefraisForfaitREP = new Lignefraisforfait();
             
             $lignefraisForfaitREP->setIdConcerner('REP');
-            $lignefraisForfaitREP->setDatemodification(new DateTime('now'));
+            $lignefraisForfaitREP->setDatemodification(new \DateTime('now'));
             $lignefraisForfaitREP->setIdEtre('CR');
             $lignefraisForfaitREP->setQuantite($montantREP);
             
@@ -110,8 +111,8 @@ class DefaultController extends Controller
             $em->flush();
             $lesVisiteurs = $service->getLesFraisForfaits();
             $lesInfosHorsforfaits = $service->getLesInfosHorsForfait();
-            $message ="Le frais a bien été ajouté";
-            return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits,'formF'=>$form2->createView()));
+            $message ="Les frais forfaits ont bien été ajoutés";
+            return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits,'formF'=>$form2->createView(),"messageFrais"=>$message));
             
         }
 

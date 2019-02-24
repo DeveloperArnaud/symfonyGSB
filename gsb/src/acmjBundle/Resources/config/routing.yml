@@ -19,9 +19,9 @@ acmj_suppression_fiche:
     path:   /accueil/fichefrais/{idFraisHF}
     defaults: { _controller: acmjBundle:Default:suppressionFraisHF }
 
-acmj_test_insert:
-    path:   /accueil/test/{id}
-    defaults: { _controller: acmjBundle:Default:test }
+acmj_add_frais_forfait:
+    path:   /accueil/fichefrais
+    defaults: { _controller: acmjBundle:Default:addFraisForfait }
 
 
 
