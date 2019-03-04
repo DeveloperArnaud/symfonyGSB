@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * Visiteur
  *
- * @ORM\Table(name="visiteur", indexes={@ORM\Index(name="I_FK_VISITEUR_COMPTABLE", columns={"ID_GERER"})})
+ * @ORM\Table(name="visiteur")
  * @ORM\Entity(repositoryClass="acmjBundle\Repository\VisiteurRepository")
  */
 class Visiteur implements UserInterface,\Serializable

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Lignefraisforfait
  *
  * @ORM\Table(name="lignefraisforfait", indexes={@ORM\Index(name="I_FK_LIGNEFRAISFORFAIT_FRAISFORFAIT", columns={"ID_CONCERNER"}), @ORM\Index(name="I_FK_LIGNEFRAISFORFAIT_ETAT", columns={"ID_ETRE"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="acmjBundle\Repository\LignefraisforfaitRepository")
  */
 class Lignefraisforfait
 {
@@ -50,5 +50,110 @@ class Lignefraisforfait
     private $datemodification;
 
 
-}
 
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set idConcerner
+     *
+     * @param string $idConcerner
+     *
+     * @return Lignefraisforfait
+     */
+    public function setIdConcerner($idConcerner)
+    {
+        $this->idConcerner = $idConcerner;
+
+        return $this;
+    }
+
+    /**
+     * Get idConcerner
+     *
+     * @return string
+     */
+    public function getIdConcerner()
+    {
+        return $this->idConcerner;
+    }
+
+    /**
+     * Set idEtre
+     *
+     * @param integer $idEtre
+     *
+     * @return Lignefraisforfait
+     */
+    public function setIdEtre($idEtre)
+    {
+        $this->idEtre = $idEtre;
+
+        return $this;
+    }
+
+    /**
+     * Get idEtre
+     *
+     * @return integer
+     */
+    public function getIdEtre()
+    {
+        return $this->idEtre;
+    }
+
+    /**
+     * Set quantite
+     *
+     * @param integer $quantite
+     *
+     * @return Lignefraisforfait
+     */
+    public function setQuantite($quantite)
+    {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    /**
+     * Get quantite
+     *
+     * @return integer
+     */
+    public function getQuantite()
+    {
+        return $this->quantite;
+    }
+
+    /**
+     * Set datemodification
+     *
+     * @param \DateTime $datemodification
+     *
+     * @return Lignefraisforfait
+     */
+    public function setDatemodification($datemodification)
+    {
+        $this->datemodification = $datemodification;
+
+        return $this;
+    }
+
+    /**
+     * Get datemodification
+     *
+     * @return \DateTime
+     */
+    public function getDatemodification()
+    {
+        return $this->datemodification;
+    }
+}

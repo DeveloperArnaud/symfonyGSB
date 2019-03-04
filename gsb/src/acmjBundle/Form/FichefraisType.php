@@ -18,7 +18,8 @@ class FichefraisType extends AbstractType
         $builder->add('mois', EntityType::class, array(
             'label'=> 'Mois',
             'class' => 'acmjBundle:Fichefrais'
-        ))->add ('save', SubmitType::class, array ('label'=> 'Valider'));
+        ))->add ('save', SubmitType::class, array ('label'=> 'Valider'))
+        ;
     }
     
     /**

@@ -35,10 +35,24 @@ class GSBPdoService
         return $lesFF;
     }
 
-    public function getLesInfosHorsForfait() {
-        $stmt= self::$db->query("SELECT * from lignefraishorsforfait");
+    public function getLesInfosHorsForfait($idVisiteur) {
+        $stmt= self::$db->query("SELECT * from lignefraishorsforfait where idVisiteur ='$idVisiteur'");
         $lesFF = $stmt->fetchAll();
         return $lesFF;
+    }
+
+    public function getLesInfosParIdFiche($id) {
+        $stmt= self::$db->query("SELECT * from lignefraishorsforfait join fichefrais on lignefraishorsforfait.ID = lignefraishorsforfait.ID_1 where fichefrais.id = $id");
+        $lesFF = $stmt->fetchAll();
+        return $lesFF;
+
+    }
+
+    public function updateInfos($id,$libelle,$montant) {
+        $sql= self::$db->query("UPDATE lignefraishorsforfait SET LIBELLE='$libelle' and MONTANT='$montant' where ID= $id ");
+        self::$db->exec($sql);
+        
+
     }
 
 }

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Lignefraishorsforfait
  *
  * @ORM\Table(name="lignefraishorsforfait", indexes={@ORM\Index(name="I_FK_LIGNEFRAISHORSFORFAIT_ETAT", columns={"ID_ETRE1"}), @ORM\Index(name="I_FK_LIGNEFRAISHORSFORFAIT_FICHEFRAIS", columns={"ID_1"}), @ORM\Index(name="I_FK_LIGNEFRAISHORSFORFAIT_LIGNEFRAISFORFAIT", columns={"ID_2"}), @ORM\Index(name="I_FK_LIGNEFRAISHORSFORFAIT_FICHEFRAIS1", columns={"ID_3"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="acmjBundle\Repository\LignefraishorsforfaitRepository")
  */
 class Lignefraishorsforfait
 {
@@ -76,6 +76,12 @@ class Lignefraishorsforfait
      * @ORM\Column(name="DATEMODIF", type="date", nullable=true)
      */
     private $datemodif;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="acmjBundle\Entity\Visiteur")
+     * @ORM\JoinColumn(name="idVisiteur", referencedColumnName="ID")
+     */
+     private $idVisiteur;
 
 
 
@@ -279,5 +285,29 @@ class Lignefraishorsforfait
     public function getDatemodif()
     {
         return $this->datemodif;
+    }
+
+    /**
+     * Set idVisiteur
+     *
+     * @param \acmjBundle\Entity\Visiteur $idVisiteur
+     *
+     * @return Lignefraishorsforfait
+     */
+    public function setIdVisiteur(\acmjBundle\Entity\Visiteur $idVisiteur)
+    {
+        $this->idVisiteur = $idVisiteur;
+
+        return $this;
+    }
+
+    /**
+     * Get idVisiteur
+     *
+     * @return \acmjBundle\Entity\Visiteur
+     */
+    public function getIdVisiteur()
+    {
+        return $this->idVisiteur;
     }
 }
