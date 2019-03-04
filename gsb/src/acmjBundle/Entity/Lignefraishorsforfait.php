@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Lignefraishorsforfait
  *
- * @ORM\Table(name="lignefraishorsforfait", indexes={@ORM\Index(name="I_FK_LIGNEFRAISHORSFORFAIT_ETAT", columns={"ID_ETRE1"}), @ORM\Index(name="I_FK_LIGNEFRAISHORSFORFAIT_FICHEFRAIS", columns={"ID_1"}), @ORM\Index(name="I_FK_LIGNEFRAISHORSFORFAIT_LIGNEFRAISFORFAIT", columns={"ID_2"}), @ORM\Index(name="I_FK_LIGNEFRAISHORSFORFAIT_FICHEFRAIS1", columns={"ID_3"})})
+ * @ORM\Table(name="lignefraishorsforfait")
  * @ORM\Entity(repositoryClass="acmjBundle\Repository\LignefraishorsforfaitRepository")
  */
 class Lignefraishorsforfait
@@ -20,34 +20,6 @@ class Lignefraishorsforfait
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="ID_ETRE1", type="smallint", nullable=false)
-     */
-    private $idEtre1;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="ID_1", type="integer", nullable=false)
-     */
-    private $id1;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="ID_2", type="smallint", nullable=false)
-     */
-    private $id2;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="ID_3", type="integer", nullable=false)
-     */
-    private $id3;
 
     /**
      * @var string
@@ -77,11 +49,19 @@ class Lignefraishorsforfait
      */
     private $datemodif;
 
+
     /**
-     * @ORM\ManyToOne(targetEntity="acmjBundle\Entity\Visiteur")
-     * @ORM\JoinColumn(name="idVisiteur", referencedColumnName="ID")
+     * @var string
+     *
+     * @ORM\Column(name="idVisiteur", type="string", length=128, nullable=false)
      */
      private $idVisiteur;
+
+     /**
+     * @ORM\ManyToOne(targetEntity="acmjBundle\Entity\Fichefrais", inversedBy="lignefraisHF")
+     * @ORM\JoinColumn(name="idFichefrais", referencedColumnName="ID", nullable=false)
+     */
+    private $idFichefrais;
 
 
 
@@ -288,13 +268,37 @@ class Lignefraishorsforfait
     }
 
     /**
-     * Set idVisiteur
+     * Set idFichefrais
      *
-     * @param \acmjBundle\Entity\Visiteur $idVisiteur
+     * @param \acmjBundle\Entity\Fichefrais $idFichefrais
      *
      * @return Lignefraishorsforfait
      */
-    public function setIdVisiteur(\acmjBundle\Entity\Visiteur $idVisiteur)
+    public function setIdFichefrais($id)
+    {
+        $this->idFichefrais = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get idFichefrais
+     *
+     * @return \acmjBundle\Entity\Fichefrais
+     */
+    public function getIdFichefrais()
+    {
+        return $this->idFichefrais;
+    }
+
+    /**
+     * Set idVisiteur
+     *
+     * @param string $idVisiteur
+     *
+     * @return Lignefraishorsforfait
+     */
+    public function setIdVisiteur($idVisiteur)
     {
         $this->idVisiteur = $idVisiteur;
 
@@ -304,7 +308,7 @@ class Lignefraishorsforfait
     /**
      * Get idVisiteur
      *
-     * @return \acmjBundle\Entity\Visiteur
+     * @return string
      */
     public function getIdVisiteur()
     {

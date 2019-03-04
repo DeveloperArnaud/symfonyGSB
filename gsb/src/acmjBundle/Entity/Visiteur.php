@@ -84,6 +84,7 @@ class Visiteur implements UserInterface,\Serializable
      * @ORM\Column(name="COMPTABLE", type="boolean", nullable=true)
      */
     private $comptable;
+    
 
 
 

@@ -124,6 +124,10 @@
          {% if message is defined  %}
                 <div class ="erreur">
                     <ul>{{message}}</ul></div>
+            {% elseif messageUpdate is defined %}
+            <div class ="erreur">
+                    <ul>{{messageUpdate}}</ul></div>
+
             {% endif %}
 
             <td>{{ infoHF.DATE }} </td>

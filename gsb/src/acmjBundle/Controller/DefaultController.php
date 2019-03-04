@@ -13,6 +13,7 @@ use acmjBundle\Entity\Lignefraisforfait;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use acmjBundle\Entity\Fichefrais;
+use acmjBundle\Entity\Visiteur;
 use acmjBundle\Form\LignefraishorsforfaitType;
 use acmjBundle\Entity\Lignefraishorsforfait;
 
@@ -36,22 +37,28 @@ class DefaultController extends Controller
         $form = $this->createForm(LignefraishorsforfaitType::class);
         $form->handleRequest($request);
         $form2->handleRequest($request);
+        $fichefrais = new FicheFrais();
         if ($form->isValid() && $form->isSubmitted()) {
             $date = $form["date"]->getData();
             $libelle = $form["libelle"]->getData();
             $montant = $form["montant"]->getData();
+            $fichefrais->setIdEtre2('CR')
+            ->setIdDeclarer($id)
+            ->setMois('201902')
+            ->setNbjustificatifs(1);
+            
 
             $fraishorsforfait = new Lignefraishorsforfait();
             $fraishorsforfait->setDate($date);
-            $fraishorsforfait->setIdEtre1('CR');
-            $fraishorsforfait->setId1(1);
-            $fraishorsforfait->setId2(1);
-            $fraishorsforfait->setId3(3);
             $fraishorsforfait->setDatemodif(new \DateTime('now'));
             $fraishorsforfait->setLibelle($libelle);
             $fraishorsforfait->setMontant($montant);
             $fraishorsforfait->setIdVisiteur($id);
+            $fraishorsforfait->setIdFichefrais($fichefrais->getId());
+            $fichefrais->setMontantvalide($fraishorsforfait->getMontant());
+            $fichefrais->setDatemodif($fraishorsforfait->getDatemodif());
             $em = $this->getDoctrine()->getManager();
+            $em->persist($fichefrais);
             $em->persist($fraishorsforfait);
             $em->flush();
             $lesVisiteurs = $service->getLesFraisForfaits();
@@ -95,20 +102,13 @@ class DefaultController extends Controller
             $lignefraisForfaitREP->setDatemodification(new \DateTime('now'));
             $lignefraisForfaitREP->setIdEtre('CR');
             $lignefraisForfaitREP->setQuantite($montantREP);
+           
 
-            $fichefrais = new FicheFrais();
-            $fichefrais->setIdEtre2('CR')
-                        ->setIdDeclarer($id)
-                        ->setMois('201902')
-                        ->setNbjustificatifs(1)
-                        ->setMontantvalide($fraishorsforfait->getMontant())
-                        ->setDatemodif($fraishorsforfait->getDatemodif());
             $em = $this->getDoctrine()->getManager();
             $em->persist($lignefraisForfaitETP);
             $em->persist($lignefraisForfaitKM);
             $em->persist($lignefraisForfaitNUI);
             $em->persist($lignefraisForfaitREP);
-            $em->persist($fichefrais);
             $em->flush();
             $lesVisiteurs = $service->getLesFraisForfaits();
             $lesInfosHorsforfaits = $service->getLesInfosHorsForfait($id);
@@ -174,7 +174,7 @@ class DefaultController extends Controller
 
     }
 
-    public function updateHFAction(Request $request,$idHF,$libelle,$montant) {
+    public function updateHFAction(Request $request,$idHF,$id) {
         $db = $this->get('gsb.pdo');
         $service = new GSBPdoService($db);
         $repository = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Fraisforfait');
@@ -186,8 +186,9 @@ class DefaultController extends Controller
         $libelle = $request->get("libelle");
         $montant = $request->get("montant");
         $update = $service->updateInfos($idHF,$libelle,$montant);
+        $form2 =$this->createForm(LignefraisforfaitType::class);
         $message ="Le frais a bien été modifié";
-        return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits,"messageUpdate"=>$message,"update"=>$update));
+        return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits,"messageUpdate"=>$message,"update"=>$update,'formF'=>$form2->createView()));
     } 
         
 

@@ -20,7 +20,7 @@ acmj_suppression_fiche:
     defaults: { _controller: acmjBundle:Default:suppressionFraisHF }
 
 acmj_updatefiche:
-    path:   /accueil/update/{idHF}
+    path:   /accueil/update/{idHF}/{id}
     defaults: { _controller: acmjBundle:Default:updateHF }
     
 

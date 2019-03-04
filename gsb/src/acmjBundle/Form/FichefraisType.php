@@ -15,14 +15,10 @@ class FichefraisType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('mois', EntityType::class, array(
-            'label'=> 'Mois',
-            'class' => 'acmjBundle:Fichefrais'
-        ))->add ('save', SubmitType::class, array ('label'=> 'Valider'))
-        ;
-    }
-    
-    /**
+        $builder->add('mois', EntityType::class,array(
+        'class'=>'acmjBundle\Entity\Fichefrais',
+        'label'=>'Mois'))->add('submit',SubmitType::class,array('label'=>'Valider'));
+    }/**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
@@ -31,7 +27,6 @@ class FichefraisType extends AbstractType
             'data_class' => 'acmjBundle\Entity\Fichefrais'
         ));
     }
-    
 
     /**
      * {@inheritdoc}

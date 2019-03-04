@@ -49,8 +49,8 @@ class GSBPdoService
     }
 
     public function updateInfos($id,$libelle,$montant) {
-        $sql= self::$db->query("UPDATE lignefraishorsforfait SET LIBELLE='$libelle' and MONTANT='$montant' where ID= $id ");
-        self::$db->exec($sql);
+        $sql= self::$db->exec("UPDATE lignefraishorsforfait SET LIBELLE='$libelle',MONTANT='$montant' where ID= $id ");
+       
         
 
     }

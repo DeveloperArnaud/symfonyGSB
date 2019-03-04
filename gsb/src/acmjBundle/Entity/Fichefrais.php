@@ -64,6 +64,14 @@ class Fichefrais
     private $datemodif;
 
 
+    /**
+     * @ORM\OneToMany(targetEntity="acmjBundle\Entity\Lignefraishorsforfait", mappedBy="idFichefrais")
+     */
+    private $lignefraisHF;
+
+
+
+
 
     /**
      * Get id
@@ -226,4 +234,5 @@ class Fichefrais
         
        
     }
+    
 }

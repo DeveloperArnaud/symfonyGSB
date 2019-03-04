@@ -85,7 +85,7 @@
         </tr>
        {% for infoHF in infosHF %}
         <tr>
-        <form action={{path('acmj_updatefiche', {idHF : infoHF.id} )}}>
+        <form action={{path('acmj_updatefiche', {idHF : infoHF.id, id : app.user.id } )}} method= "POST" >
 
             <td>{{ infoHF.DATE | date("d/m/Y") }} </td>
             <td><input type="text" name="libelle" size="100" value={{ infoHF.LIBELLE }} /></td>
