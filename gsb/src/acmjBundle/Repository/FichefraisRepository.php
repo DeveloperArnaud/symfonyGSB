@@ -30,5 +30,24 @@ class FichefraisRepository extends \Doctrine\ORM\EntityRepository
 
     }
 
+    public function findByIdVisiteurAndMois($id,$mois) {
+
+        $parameters = array (
+            'idVisiteur' =>$id,
+            'mois'=>$mois
+        );
+
+        $query = $this->createQueryBuilder('f')
+                        ->where('f.idDeclarer = :idVisiteur')
+                        ->andWhere('f.mois = :mois')
+                        ->setParameters($parameters)
+                        ->getQuery()
+                        ->getResult();
+                         return $query;
+                    
+                        
+                    
+        }
+
 
 }

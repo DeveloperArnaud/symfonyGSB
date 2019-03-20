@@ -16,6 +16,8 @@ use acmjBundle\Entity\Fichefrais;
 use acmjBundle\Entity\Visiteur;
 use acmjBundle\Form\LignefraishorsforfaitType;
 use acmjBundle\Entity\Lignefraishorsforfait;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class DefaultController extends Controller
 {
@@ -32,21 +34,33 @@ class DefaultController extends Controller
         $db = $this->get('gsb.pdo');
         $service = new GSBPdoService($db);
         
+        $repository = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Fichefrais');
+        $ficheduMois = $repository->findByIdVisiteurAndMois($id,'201903');
+        if(empty($ficheduMois)) {
+            $fichefrais = new FicheFrais();
+         
+            $fichefrais->setIdEtre2('CR')
+                ->setIdDeclarer($id)
+                ->setMois('201903')
+                ->setMontantvalide(0)
+                ->setNbJustificatifs(1)
+                ->setDatemodif(new \DateTime('now'));
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($fichefrais);
+                $em->flush();
+
+               
+        }
 
         $form2 =$this->createForm(LignefraisforfaitType::class);
         $form = $this->createForm(LignefraishorsforfaitType::class);
         $form->handleRequest($request);
         $form2->handleRequest($request);
-        $fichefrais = new FicheFrais();
+
         if ($form->isValid() && $form->isSubmitted()) {
             $date = $form["date"]->getData();
             $libelle = $form["libelle"]->getData();
             $montant = $form["montant"]->getData();
-            $fichefrais->setIdEtre2('CR')
-            ->setIdDeclarer($id)
-            ->setMois('201902')
-            ->setNbjustificatifs(1);
-            
 
             $fraishorsforfait = new Lignefraishorsforfait();
             $fraishorsforfait->setDate($date);
@@ -54,17 +68,25 @@ class DefaultController extends Controller
             $fraishorsforfait->setLibelle($libelle);
             $fraishorsforfait->setMontant($montant);
             $fraishorsforfait->setIdVisiteur($id);
-            $fraishorsforfait->setIdFichefrais($fichefrais->getId());
-            $fichefrais->setMontantvalide($fraishorsforfait->getMontant());
-            $fichefrais->setDatemodif($fraishorsforfait->getDatemodif());
+
+
+            
+            $maFichefrais = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Fichefrais')->findByIdVisiteurAndMois($id,'201903');
+            
+            foreach($maFichefrais as $maFiche) {
+            $fraishorsforfait->setIdFichefrais($maFiche->getId());
+            }
+
             $em = $this->getDoctrine()->getManager();
-            $em->persist($fichefrais);
             $em->persist($fraishorsforfait);
             $em->flush();
+
             $lesVisiteurs = $service->getLesFraisForfaits();
             $lesInfosHorsforfaits = $service->getLesInfosHorsForfait($id);
-            $message ="Le frais a bien été ajouté";
             
+            $montantHF = $service->countLigneHorsForfait($id,$maFiche->getId());
+            $message ="Le frais a bien été ajouté";
+
             return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits,'message'=>$message,'formF'=>$form2->createView()));
         }
 
@@ -80,6 +102,7 @@ class DefaultController extends Controller
             $lignefraisForfaitETP->setDatemodification(new \DateTime('now'));
             $lignefraisForfaitETP->setIdEtre('CR');
             $lignefraisForfaitETP->setQuantite($montantETP);
+            $lignefraisForfaitETP->setIdVisiteur($id);
 
             $lignefraisForfaitKM = new Lignefraisforfait();
 
@@ -87,6 +110,7 @@ class DefaultController extends Controller
             $lignefraisForfaitKM->setDatemodification(new \DateTime('now'));
             $lignefraisForfaitKM->setIdEtre('CR');
             $lignefraisForfaitKM->setQuantite($montantKM);
+            $lignefraisForfaitKM->setIdVisiteur($id);
 
             $lignefraisForfaitNUI = new Lignefraisforfait();
             
@@ -94,7 +118,7 @@ class DefaultController extends Controller
             $lignefraisForfaitNUI->setDatemodification(new \DateTime('now'));
             $lignefraisForfaitNUI->setIdEtre('CR');
             $lignefraisForfaitNUI->setQuantite($montantNUI);
-
+            $lignefraisForfaitNUI->setIdVisiteur($id);
             
             $lignefraisForfaitREP = new Lignefraisforfait();
             
@@ -102,7 +126,8 @@ class DefaultController extends Controller
             $lignefraisForfaitREP->setDatemodification(new \DateTime('now'));
             $lignefraisForfaitREP->setIdEtre('CR');
             $lignefraisForfaitREP->setQuantite($montantREP);
-           
+            $lignefraisForfaitREP->setIdVisiteur($id);
+
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($lignefraisForfaitETP);
@@ -122,6 +147,8 @@ class DefaultController extends Controller
         return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits,'formF'=>$form2->createView()));
     }
 
+
+
     public function consulterFichefraisAction(Request $request,$id)
     {
         $db = $this->get('gsb.pdo');
@@ -134,11 +161,13 @@ class DefaultController extends Controller
          
             $infosFiche = $service->getLesInfos($id);
             $repository = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Lignefraishorsforfait');
-            $infosFraisHF = $repository->findAll();
+            $infosFraisHF = $repository->getLesLignesHFByIdVisiteur($id);
             $repositoryFF = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Fraisforfait');
             $infosFraisF = $repositoryFF->findAll();
             $repositoryFF1 = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Lignefraisforfait');
             $infosFraisF1 = $repositoryFF1->findAll();
+            $lignefraisInfos= $service->getLigneFraisByIdVisiteur($id);
+            
 
             if (empty($infosFiche)) {
                 return $this->render('@acmj/Default/consulter_fiche_frais.html.twig',array('form'=>$form->createView(),'msg'=>"Pas de fiche frais pour ce mois-ci"));
@@ -146,7 +175,7 @@ class DefaultController extends Controller
             
             
             
-            return $this->render('@acmj/Default/consulter_fiche_frais.html.twig', array('infos'=> $infosFiche,'form'=>$form->createView(),'infosHF'=> $infosFraisHF,'infosFF'=>$infosFraisF,'infosFF1'=>$infosFraisF1));
+            return $this->render('@acmj/Default/consulter_fiche_frais.html.twig', array('infos'=> $infosFiche,'form'=>$form->createView(),'infosHF'=> $infosFraisHF,'infosFF'=>$infosFraisF,'infosFF1'=>$lignefraisInfos));
             
         } 
 
@@ -156,10 +185,11 @@ class DefaultController extends Controller
     }
 
 
-    public function suppressionFraisHFAction($idFraisHF) {
+    public function suppressionFraisHFAction($idFraisHF,$idVisiteur) {
         $repository = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Fraisforfait');
         $fraisf = $repository->findAll();
         $form = $this->createForm(LignefraishorsforfaitType::class);
+        $form2 =$this->createForm(LignefraisforfaitType::class);
         $repository = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Lignefraishorsforfait');
         $fraishorsforfait = $repository->find($idFraisHF);
         $em = $this->getDoctrine()->getManager();
@@ -169,8 +199,8 @@ class DefaultController extends Controller
         $db = $this->get('gsb.pdo');
         $service = new GSBPdoService($db);
         $lesVisiteurs = $service->getLesFraisForfaits();
-        $lesInfosHorsforfaits = $service->getLesInfosHorsForfait($id);
-        return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits,"message"=>$message));
+        $lesInfosHorsforfaits = $service->getLesInfosHorsForfait($idVisiteur);
+        return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits,"message"=>$message,'formF'=>$form2->createView()));
 
     }
 
@@ -190,6 +220,31 @@ class DefaultController extends Controller
         $message ="Le frais a bien été modifié";
         return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits,"messageUpdate"=>$message,"update"=>$update,'formF'=>$form2->createView()));
     } 
+
+    public function updateForfaitAction(Request $request,$idForfait,$idVisiteur) {
+        $db = $this->get('gsb.pdo');
+        $service = new GSBPdoService($db);
+        $repository = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Fraisforfait');
+        $fraisf = $repository->findAll();
+        $form = $this->createForm(LignefraishorsforfaitType::class);
+        $lesVisiteurs = $service->getLesFraisForfaits();
+        $lesInfosHorsforfaits = $service->getLesInfosHorsForfait($idVisiteur);
+        $repository = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Lignefraishorsforfait');
+        $quantite = $request->get("quantite");
+        $update = $service->updateInfosForfait($idForfait,$quantite);
+        $form2 =$this->createForm(LignefraisforfaitType::class);
+        $message ="Le frais forfait a bien été modifié";
+        return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits,"messageUpdate"=>$message,"update"=>$update,'formF'=>$form2->createView()));
+    } 
+
+
+    public function existCountAction() {
+        $db = $this->get('gsb.pdo');
+        $service = new GSBPdoService($db);
+        $repositoryCount = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Lignefraishorsforfait');
+        $ficheCount = $repositoryCount->countHF();
+        return $this->render('@acmj/Default/testDQL.html.twig',$ficheCount);
+    }
         
 
 

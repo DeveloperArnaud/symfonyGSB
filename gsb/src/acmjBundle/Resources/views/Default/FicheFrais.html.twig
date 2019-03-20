@@ -133,7 +133,7 @@
             <td>{{ infoHF.DATE }} </td>
             <td> {{ infoHF.LIBELLE }} </td>
             <td> {{ infoHF.MONTANT }} </td>
-            <td><a href= {{path('acmj_suppression_fiche',{idFraisHF: infoHF.ID })}} onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">Supprimer</a></td>
+            <td><a href= {{path('acmj_suppression_fiche',{idFraisHF: infoHF.ID, idVisiteur: app.user.id })}} onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">Supprimer</a></td>
         </tr>
          {% endfor %}
     </div>

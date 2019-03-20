@@ -10,6 +10,25 @@ namespace acmjBundle\Repository;
  */
 class LignefraishorsforfaitRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function countHF() {
+        $query = $this->createQueryBuilder('f')
+        ->select('count(f)')
+        ->getQuery()
+        ->getResult();
+         return $query;
+    
+    }
+
+    public function getLesLignesHFByIdVisiteur($id) {
+        $query = $this->createQueryBuilder('f')
+        ->select('f')
+        ->Where('f.idVisiteur = :id')
+        ->setParameter('id',$id)
+        ->getQuery()
+        ->getResult();
+         return $query;
+
+    }
 
 
 

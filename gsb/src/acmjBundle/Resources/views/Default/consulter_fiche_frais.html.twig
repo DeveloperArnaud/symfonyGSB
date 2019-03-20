@@ -43,32 +43,8 @@
       {% for info in infos %} 
       <fieldset>
       <legend> Votre fiche frais du mois {{ info.MOIS }}   </legend>
-      <p>
-      <label for="txtDATEHF"> Date de modification (jj/mm/aaaa): {{ info.DATEMODIF }} </label>
-      </p>
-       <p>
-      <label for="txtDATEHF"> Mois : {{ info.MOIS }} </label>
-      </p>
-        <p>
-      <label for="txtDATEHF"> Etat : {{ info.ID_ETRE2 }} </label>
-      </p>
-
-         <p>
-      <label for="txtDATEHF"> Justificatif(s): {{ info.NBJUSTIFICATIFS }} </label>
-      </p>
-
-        <p>
-      <label for="txtDATEHF"> Montant Total: {{ info.MONTANTVALIDE }}</label>
-      </p>
      {% endfor %}
-        <br>
-        <br>
-        <br>
-        <br>
-           <br>
-        <br>
-        <br>
-        <br>
+
     <table class="listeLegere">
     <fieldset>
       <legend>Les élements hors forfait </legend>
@@ -101,6 +77,7 @@
         <br>
         <br>
         <br>
+        {% if infosFF1 is defined %}
         <div class="corpsForm">
      <table class="listeLegere">
         <fieldset>
@@ -114,15 +91,18 @@
             <th class="montant">Action</th>
 
         </tr>
-       {% for infoFF in infosFF %}
-        <tr>
 
-            <td>{{"now"|date("d/m/Y")}} </td>
-            <td>{{infoFF.LIBELLE}}</td>
-            <td><input type="number" placeholder="Non indiquée"></td>
-            <td><a href="#" }} onclick="return confirm('Voulez-vous vraiment modifier ce frais ?');">Modifier</a></td>
-        </tr>
-    {% endfor %} 
+    {% for infoFFor in infosFF1 %}
+    <tr>
+<form action={{path('acmj_update_forfait',{idForfait : infoFFor.ID , idVisiteur: app.user.id })}} method="POST">
+        <td>{{infoFFor.DATEMODIFICATION|date("d/m/Y")}} </td>
+        <td>{{infoFFor.ID_CONCERNER}}</td>
+        <td><input type="text" name="quantite" placeholder={{infoFFor.QUANTITE}}></td>
+        <td><input type="submit" value="Modifier" onclick="return confirm('Voulez-vous vraiment modifier ce frais ?');"></td>
+    </form>
+    </tr>
+{% endfor %} 
+{% endif %}
     {% elseif msg is defined %}       
      <div class ="erreur">
                     <ul>{{msg}}</ul></div>

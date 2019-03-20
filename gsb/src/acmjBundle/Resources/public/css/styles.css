@@ -1,11 +1,10 @@
 /* Styles des divisions principales de la page */
 body{
-    background-color: #77AADD;
+    background-color: #f5f5f5;
     background-image: url(imgs/FONDGLOBAL.jpg);
     background-repeat: repeat-x;
     margin:0% 0%;
     padding : 0.6em;
-    font-family:"Trebuchet MS",Verdana,Geneva,Arial,Helvetica,sans-serif;
     font-size:0.8em;
 }
 #page {
@@ -16,9 +15,8 @@ body{
     padding : 0.1em;
 }
 #entete{
-    background-color:rgb(72,198,236);
-    color : #980101;
-    border: solid 0.1em #980101;
+    background-color:#f5f5f5;
+    border: solid 0.1em #1d2941;
     height: 154px;
     padding: 0em;
     border-collapse: separate;
@@ -34,8 +32,7 @@ body{
 }
 #menuGauche {
     margin-top : 0.8em;
-    padding: 1em;
-    background-color: white;
+    padding: 1.5em;
     color: rgb(0,85,227);
     float: left;
     width: 14%;
@@ -43,9 +40,8 @@ body{
 
 #contenu{
     border: none;
-    padding: 1.3em;
+    padding: 1em;
     background-color: white;
-    border-left :  groove 0.8em #980101;
     margin-top : 1.2em;
     margin-left: 18%;
     /* permet de fixer une hauteur mini sur les navigateurs modernes */
@@ -123,21 +119,14 @@ ul#menuList a:hover {
 
 /* Style des formulaires */
 .corpsForm {
-    border : solid 0.1em #000;
     border-bottom-width:1px;
     margin-bottom : 0em;
     width : 95%;
 }
 .piedForm {
-    border-bottom-width : 0.1em;
-    border-left-width : 0.1em;
-    border-right-width : 0.1em;
-    border-top-width : 0em;
-    border-style : solid;
-    border-color : #000;
+
     text-align:right ;
-    width : 95%;
-    margin-top:0em;
+
 }
 form {
     margin-bottom:1em;

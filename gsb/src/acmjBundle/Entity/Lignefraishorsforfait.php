@@ -58,10 +58,11 @@ class Lignefraishorsforfait
      private $idVisiteur;
 
      /**
-     * @ORM\ManyToOne(targetEntity="acmjBundle\Entity\Fichefrais", inversedBy="lignefraisHF")
-     * @ORM\JoinColumn(name="idFichefrais", referencedColumnName="ID", nullable=false)
+     * @ORM\Column(name="idFichefrais", type="string", length=128, nullable=false)
      */
     private $idFichefrais;
+
+
 
 
 

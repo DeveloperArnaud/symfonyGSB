@@ -55,4 +55,24 @@ class GSBPdoService
 
     }
 
+    public function getLigneFraisByIdVisiteur($id) {
+        $stmt= self::$db->query("SELECT * from lignefraisforfait where idVisiteur ='$id'");
+        $lesFF = $stmt->fetchAll();
+        return $lesFF;
+    }
+
+    public function countLigneHorsForfait($idVisiteur,$idFicheFrais){
+        $stmt = self::$db->query("SELECT count(*) from lignefraishorsforfait where idVisiteur = '$idVisiteur' and idFichefrais='$idFicheFrais'");
+        $lesFF = $stmt->fetchAll();
+        return $lesFF;
+    }
+
+    
+    public function updateInfosForfait($id,$quantite) {
+        $sql= self::$db->exec("UPDATE lignefraisforfait SET QUANTITE='$quantite' where ID= $id ");
+       
+        
+
+    }
+
 }

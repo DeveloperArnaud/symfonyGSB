@@ -11,11 +11,25 @@ namespace acmjBundle\Repository;
 class LignefraisforfaitRepository extends \Doctrine\ORM\EntityRepository
 {
   
-    public function getLesFraisForfaits() {
-        $stmt= self::$db->query('SELECT * from fraisforfait');
-        $lesFF = $stmt->fetchAll();
-        return $lesFF;
+    public function findByIdVisiteurAndDate($id,$date) {
+        
+        $parameters = array (
+            'idVisiteur' =>$id,
+            'dateModif'=>$date
+        );
+
+        $query = $this->createQueryBuilder('f')
+        ->select('f')
+        ->Where('f.idVisiteur = :idVisiteur')
+        ->andWhere('f.datemodification = :dateModif')
+        ->setParameters($parameters)
+        ->getQuery()
+        ->getResult();
+         return $query;
+    
     }
+
+
 
 
 

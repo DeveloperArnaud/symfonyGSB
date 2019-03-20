@@ -16,12 +16,21 @@ acmj_consulter_fichefrais:
     defaults: { _controller: acmjBundle:Default:consulterFichefrais }
 
 acmj_suppression_fiche:
-    path:   /accueil/fichefrais/{idFraisHF}
+    path:   /accueil/fichefrais/{idFraisHF}/{idVisiteur}
     defaults: { _controller: acmjBundle:Default:suppressionFraisHF }
 
 acmj_updatefiche:
     path:   /accueil/update/{idHF}/{id}
     defaults: { _controller: acmjBundle:Default:updateHF }
+
+acmj_update_forfait:
+    path:   /accueil/updateForfait/{idForfait}/{idVisiteur}
+    defaults: { _controller: acmjBundle:Default:updateForfait }
+
+
+acmj_dql_test:
+    path:   /accueil/ficheFraisA
+    defaults: { _controller: acmjBundle:Default:existCount }
     
 
 

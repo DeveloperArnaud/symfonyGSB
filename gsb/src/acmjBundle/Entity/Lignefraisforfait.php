@@ -49,6 +49,14 @@ class Lignefraisforfait
      */
     private $datemodification;
 
+        /**
+     * @var string
+     *
+     * @ORM\Column(name="idVisiteur", type="string", length=128, nullable=false)
+     */
+    private $idVisiteur;
+
+
 
 
     /**
@@ -155,5 +163,29 @@ class Lignefraisforfait
     public function getDatemodification()
     {
         return $this->datemodification;
+    }
+
+    /**
+     * Set idVisiteur
+     *
+     * @param string $idVisiteur
+     *
+     * @return Lignefraisforfait
+     */
+    public function setIdVisiteur($idVisiteur)
+    {
+        $this->idVisiteur = $idVisiteur;
+
+        return $this;
+    }
+
+    /**
+     * Get idVisiteur
+     *
+     * @return string
+     */
+    public function getIdVisiteur()
+    {
+        return $this->idVisiteur;
     }
 }
