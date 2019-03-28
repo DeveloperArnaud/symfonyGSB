@@ -160,6 +160,7 @@ class DefaultController extends Controller
         if  ($form->isValid() && $form->isSubmitted()) {
          
             $infosFiche = $service->getLesInfos($id);
+    
             $repository = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Lignefraishorsforfait');
             $infosFraisHF = $repository->getLesLignesHFByIdVisiteur($id);
             $repositoryFF = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Fraisforfait');
@@ -169,8 +170,11 @@ class DefaultController extends Controller
             $lignefraisInfos= $service->getLigneFraisByIdVisiteur($id);
             
 
-            if (empty($infosFiche)) {
+            if (empty($lignefraisInfos)) {
                 return $this->render('@acmj/Default/consulter_fiche_frais.html.twig',array('form'=>$form->createView(),'msg'=>"Pas de fiche frais pour ce mois-ci"));
+            } elseif (empty($infosFraisHF)) {
+                return $this->render('@acmj/Default/consulter_fiche_frais.html.twig', array('infos'=> $infosFiche,'msgHF'=>"Vous n'avez pas encore renseigné les frais hors forfaits pour ce mois-ci",'infosHF'=> $infosFraisHF,'form'=>$form->createView(),'infosFF'=>$infosFraisF,'infosFF1'=>$lignefraisInfos));
+
             }
             
             

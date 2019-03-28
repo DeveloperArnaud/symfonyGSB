@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class LignefraisforfaitType extends AbstractType
 {
@@ -18,14 +18,14 @@ class LignefraisforfaitType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('ETP',null,array(
+        $builder->add('ETP',IntegerType::class,array(
             'label' => 'Forfait Etape',
             'attr'=> array('placeholder' => '               €')))
-            ->add('KM',null,array (
+            ->add('KM',IntegerType::class,array (
             'label'=> 'Forfait kilométrique','attr'=>array('placeholder'=> '               €')))
-            ->add('NUI',null,array(
+            ->add('NUI',IntegerType::class,array(
             'label'=>'Nuitée Hôtel','attr'=> array('placeholder'=> '               €')))
-            ->add('REP',null,array(
+            ->add('REP',IntegerType::class,array(
             'label'=>'Repas Restaurant','attr'=>array('placeholder'=>'               €')))
             ->add('save',SubmitType::class,array('label'=> 'Valider'))
             ->add('reset',ResetType::class,array('label'=> 'Effacer'));

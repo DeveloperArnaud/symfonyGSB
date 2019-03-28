@@ -19,7 +19,7 @@ security:
             anonymous: true
             logout:
                 path:   /logout
-                target: /login
+                target: /accueil
 
             # activate different ways to authenticate
 

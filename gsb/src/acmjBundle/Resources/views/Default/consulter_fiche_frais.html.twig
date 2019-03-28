@@ -38,6 +38,10 @@
       <div class="corpsForm">
       {{form(form)}}
       </div>
+      {% if msg is defined  %}
+                <div class ="erreur">
+                    <ul>{{msg}}</ul></div>
+            {% endif %}
       <div class="corpsForm">
         {% if infos is defined %}
       {% for info in infos %} 
@@ -59,6 +63,10 @@
             <th class="montant">Montant</th>
             <th class="montant">Action</th>
         </tr>
+        {% if msgHF is defined  %}
+        <div class ="erreur">
+            <ul>{{msgHF}}</ul></div>
+    {% endif %}
        {% for infoHF in infosHF %}
         <tr>
         <form action={{path('acmj_updatefiche', {idHF : infoHF.id, id : app.user.id } )}} method= "POST" >
