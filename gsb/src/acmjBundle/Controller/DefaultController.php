@@ -35,13 +35,13 @@ class DefaultController extends Controller
         $service = new GSBPdoService($db);
         
         $repository = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Fichefrais');
-        $ficheduMois = $repository->findByIdVisiteurAndMois($id,'201903');
+        $ficheduMois = $repository->findByIdVisiteurAndMois($id,'201904');
         if(empty($ficheduMois)) {
             $fichefrais = new FicheFrais();
          
             $fichefrais->setIdEtre2('CR')
                 ->setIdDeclarer($id)
-                ->setMois('201903')
+                ->setMois('201904')
                 ->setMontantvalide(0)
                 ->setNbJustificatifs(1)
                 ->setDatemodif(new \DateTime('now'));
@@ -182,6 +182,8 @@ class DefaultController extends Controller
             }
             
             $size = count($infosFraisHF);
+
+            
             
             return $this->render('@acmj/Default/consulter_fiche_frais.html.twig', array('infos'=> $infosFiche,'form'=>$form->createView(),'infosHF'=> $infosFraisHF,'infosFF'=>$infosFraisF,'infosFF1'=>$lignefraisInfos,'size'=>$size));
             
