@@ -29,6 +29,26 @@ class LignefraisforfaitRepository extends \Doctrine\ORM\EntityRepository
     
     }
 
+    public function findByDateAndIdVisiteur($date,$id) {
+        $parameters = array (
+            'idVisiteur' =>$id,
+            'dateModif'=>'%'.$date.'%'
+        );
+
+        $query = $this->createQueryBuilder('f')
+        ->select('f')
+        ->Where('f.idVisiteur = :idVisiteur')
+        ->andWhere('f.datemodification LIKE :dateModif')
+        ->setParameters($parameters)
+        ->getQuery()
+        ->getResult();
+         return $query;
+    
+
+    }
+
+    
+
 
 
 

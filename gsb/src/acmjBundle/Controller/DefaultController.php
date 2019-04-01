@@ -127,7 +127,12 @@ class DefaultController extends Controller
             $lignefraisForfaitREP->setIdEtre('CR');
             $lignefraisForfaitREP->setQuantite($montantREP);
             $lignefraisForfaitREP->setIdVisiteur($id);
-
+            $date = new \DateTime('now');
+            $dateFormatted = $date->format('yyyy-MM');
+            $repo = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Lignefraisforfait')->findByDateAndIdVisiteur($dateFormatted,$id);
+            if(!empty($repo)) {
+             return $this->render('@acmj/Default/FicheFrais.html.twig',array('msg'=>'Vous avez déjà renseigné ces champs'));   
+            } else {
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($lignefraisForfaitETP);
@@ -139,7 +144,7 @@ class DefaultController extends Controller
             $lesInfosHorsforfaits = $service->getLesInfosHorsForfait($id);
             $message ="Les frais forfaits ont bien été ajoutés";
             return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits,'formF'=>$form2->createView(),"messageFrais"=>$message));
-            
+            }
         }
 
         $lesVisiteurs = $service->getLesFraisForfaits();
@@ -160,7 +165,6 @@ class DefaultController extends Controller
         if  ($form->isValid() && $form->isSubmitted()) {
          
             $infosFiche = $service->getLesInfos($id);
-    
             $repository = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Lignefraishorsforfait');
             $infosFraisHF = $repository->getLesLignesHFByIdVisiteur($id);
             $repositoryFF = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Fraisforfait');
@@ -177,9 +181,9 @@ class DefaultController extends Controller
 
             }
             
+            $size = count($infosFraisHF);
             
-            
-            return $this->render('@acmj/Default/consulter_fiche_frais.html.twig', array('infos'=> $infosFiche,'form'=>$form->createView(),'infosHF'=> $infosFraisHF,'infosFF'=>$infosFraisF,'infosFF1'=>$lignefraisInfos));
+            return $this->render('@acmj/Default/consulter_fiche_frais.html.twig', array('infos'=> $infosFiche,'form'=>$form->createView(),'infosHF'=> $infosFraisHF,'infosFF'=>$infosFraisF,'infosFF1'=>$lignefraisInfos,'size'=>$size));
             
         } 
 

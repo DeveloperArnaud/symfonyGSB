@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="5c3925c9-a9e0-4f63-854a-1cc7777fb182" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gsb/bin/symfony_requirements" beforeDir="false" afterPath="$PROJECT_DIR$/gsb/bin/symfony_requirements" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gsb/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/gsb/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gsb/var/SymfonyRequirements.php" beforeDir="false" afterPath="$PROJECT_DIR$/gsb/var/SymfonyRequirements.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gsb/web/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/gsb/web/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gsb/src/acmjBundle/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/gsb/src/acmjBundle/Controller/DefaultController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gsb/src/acmjBundle/Repository/LignefraisforfaitRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/gsb/src/acmjBundle/Repository/LignefraisforfaitRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gsb/src/acmjBundle/Resources/views/Default/consulter_fiche_frais.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/gsb/src/acmjBundle/Resources/views/Default/consulter_fiche_frais.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,7 +92,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -105,6 +103,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -145,17 +144,19 @@
       <workItem from="1553367670692" duration="4000" />
       <workItem from="1553500853680" duration="41000" />
       <workItem from="1553518763310" duration="595000" />
+      <workItem from="1553883585009" duration="5000" />
+      <workItem from="1553895708536" duration="3000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5826000" />
+    <option name="totallyTimeSpent" value="5834000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22214764" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22885907" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
