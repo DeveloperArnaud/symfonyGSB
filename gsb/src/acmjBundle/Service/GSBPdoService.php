@@ -55,8 +55,8 @@ class GSBPdoService
 
     }
 
-    public function getLigneFraisByIdVisiteur($id) {
-        $stmt= self::$db->query("SELECT * from lignefraisforfait where idVisiteur ='$id'");
+    public function getLigneFraisByIdVisiteur($id,$datemodif) {
+        $stmt= self::$db->query("SELECT * from lignefraisforfait where idVisiteur ='$id' and datemodification = '$datemodif'");
         $lesFF = $stmt->fetchAll();
         return $lesFF;
     }

@@ -63,7 +63,7 @@ class DefaultController extends Controller
             $montant = $form["montant"]->getData();
 
             $fraishorsforfait = new Lignefraishorsforfait();
-            $fraishorsforfait->setDate($date);
+            $fraishorsforfait->setDate(new \DateTime('now'));
             $fraishorsforfait->setDatemodif(new \DateTime('now'));
             $fraishorsforfait->setLibelle($libelle);
             $fraishorsforfait->setMontant($montant);
@@ -71,7 +71,7 @@ class DefaultController extends Controller
 
 
             
-            $maFichefrais = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Fichefrais')->findByIdVisiteurAndMois($id,'201903');
+            $maFichefrais = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Fichefrais')->findByIdVisiteurAndMois($id,'201904');
             
             foreach($maFichefrais as $maFiche) {
             $fraishorsforfait->setIdFichefrais($maFiche->getId());
@@ -82,6 +82,8 @@ class DefaultController extends Controller
             $em->flush();
 
             $lesVisiteurs = $service->getLesFraisForfaits();
+            $dateF = new \DateTime('now');
+            $dateFor = $dateF->format('Y-m-d');
             $lesInfosHorsforfaits = $service->getLesInfosHorsForfait($id);
             
             $montantHF = $service->countLigneHorsForfait($id,$maFiche->getId());
@@ -141,6 +143,8 @@ class DefaultController extends Controller
             $em->persist($lignefraisForfaitREP);
             $em->flush();
             $lesVisiteurs = $service->getLesFraisForfaits();
+                $dateF = new \DateTime('now');
+                $dateFor = $dateF->format('Y-m-d');
             $lesInfosHorsforfaits = $service->getLesInfosHorsForfait($id);
             $message ="Les frais forfaits ont bien été ajoutés";
             return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits,'formF'=>$form2->createView(),"messageFrais"=>$message));
@@ -148,6 +152,8 @@ class DefaultController extends Controller
         }
 
         $lesVisiteurs = $service->getLesFraisForfaits();
+        $dateF = new \DateTime('now');
+        $dateFor = $dateF->format('Y-m-d');
         $lesInfosHorsforfaits = $service->getLesInfosHorsForfait($id);
         return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits,'formF'=>$form2->createView()));
     }
@@ -171,7 +177,9 @@ class DefaultController extends Controller
             $infosFraisF = $repositoryFF->findAll();
             $repositoryFF1 = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Lignefraisforfait');
             $infosFraisF1 = $repositoryFF1->findAll();
-            $lignefraisInfos= $service->getLigneFraisByIdVisiteur($id);
+            $dateNow = new \DateTime('now');
+            $dateNowF = $dateNow->format('Y-m-d');
+            $lignefraisInfos= $service->getLigneFraisByIdVisiteur($id,$dateNowF);
             
 
             if (empty($lignefraisInfos)) {
@@ -209,7 +217,8 @@ class DefaultController extends Controller
         $db = $this->get('gsb.pdo');
         $service = new GSBPdoService($db);
         $lesVisiteurs = $service->getLesFraisForfaits();
-        $lesInfosHorsforfaits = $service->getLesInfosHorsForfait($idVisiteur);
+        $dateF = '201904';
+        $lesInfosHorsforfaits = $service->getLesInfosHorsForfait($idVisiteur,$dateF);
         return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits,"message"=>$message,'formF'=>$form2->createView()));
 
     }
@@ -221,7 +230,8 @@ class DefaultController extends Controller
         $fraisf = $repository->findAll();
         $form = $this->createForm(LignefraishorsforfaitType::class);
         $lesVisiteurs = $service->getLesFraisForfaits();
-        $lesInfosHorsforfaits = $service->getLesInfosHorsForfait($id);
+        $dateF = '201904';
+        $lesInfosHorsforfaits = $service->getLesInfosHorsForfait($id,$dateF);
         $repository = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Lignefraishorsforfait');
         $libelle = $request->get("libelle");
         $montant = $request->get("montant");
@@ -238,7 +248,8 @@ class DefaultController extends Controller
         $fraisf = $repository->findAll();
         $form = $this->createForm(LignefraishorsforfaitType::class);
         $lesVisiteurs = $service->getLesFraisForfaits();
-        $lesInfosHorsforfaits = $service->getLesInfosHorsForfait($idVisiteur);
+        $dateF = '201904';
+        $lesInfosHorsforfaits = $service->getLesInfosHorsForfait($idVisiteur,$dateF);
         $repository = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Lignefraishorsforfait');
         $quantite = $request->get("quantite");
         $update = $service->updateInfosForfait($idForfait,$quantite);

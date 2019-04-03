@@ -48,7 +48,9 @@
       <fieldset>
       <legend> Votre fiche frais du mois {{ info.MOIS }}   </legend>
      <h2> Etat : Fiche créée, saisie en cours </h2>
+          {% if size is defined %}
     <b> Nb justificatifs : {{size}}</b>
+          {% endif %}
      {% endfor %}
     <table class="listeLegere">
     <fieldset>

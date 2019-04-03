@@ -4,8 +4,9 @@
     <list default="true" id="5c3925c9-a9e0-4f63-854a-1cc7777fb182" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gsb/src/acmjBundle/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/gsb/src/acmjBundle/Controller/DefaultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gsb/src/acmjBundle/Repository/LignefraisforfaitRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/gsb/src/acmjBundle/Repository/LignefraisforfaitRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gsb/src/acmjBundle/Repository/LignefraishorsforfaitRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/gsb/src/acmjBundle/Repository/LignefraishorsforfaitRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gsb/src/acmjBundle/Resources/views/Default/consulter_fiche_frais.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/gsb/src/acmjBundle/Resources/views/Default/consulter_fiche_frais.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gsb/src/acmjBundle/Service/GSBPdoService.php" beforeDir="false" afterPath="$PROJECT_DIR$/gsb/src/acmjBundle/Service/GSBPdoService.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,16 +19,81 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gsb/src/acmjBundle/Controller/DefaultController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="624">
-              <caret line="92" column="61" selection-start-line="92" selection-start-column="61" selection-end-line="92" selection-end-column="61" />
+            <state relative-caret-position="303">
+              <caret line="181" column="48" selection-start-line="181" selection-start-column="48" selection-end-line="181" selection-end-column="48" />
             </state>
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gsb/src/acmjBundle/Service/GSBPdoService.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="219">
+              <caret line="57" column="20" selection-start-line="57" selection-start-column="20" selection-end-line="57" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/gsb/src/acmjBundle/Repository/LignefraishorsforfaitRepository.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="17" column="37" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gsb/src/acmjBundle/Repository/LignefraisforfaitRepository.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gsb/src/acmjBundle/Resources/views/Default/consulter_fiche_frais.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="52" column="18" selection-start-line="52" selection-start-column="18" selection-end-line="52" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gsb/src/acmjBundle/Controller/SecurityController.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gsb/src/acmjBundle/Repository/FichefraisRepository.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="629">
+              <caret line="37" column="10" selection-start-line="34" selection-start-column="7" selection-end-line="37" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gsb/src/acmjBundle/Form/FichefraisType.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gsb/src/acmjBundle/Form/LignefraisforfaitType.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>size</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -35,7 +101,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/gsb/src/acmjBundle/Resources/views/Default/consulter_fiche_frais.html.twig" />
+        <option value="$PROJECT_DIR$/gsb/src/acmjBundle/Service/GSBPdoService.php" />
         <option value="$PROJECT_DIR$/gsb/src/acmjBundle/Controller/DefaultController.php" />
+        <option value="$PROJECT_DIR$/gsb/src/acmjBundle/Repository/LignefraishorsforfaitRepository.php" />
       </list>
     </option>
   </component>
@@ -83,15 +152,17 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="100" />
-    <option name="width" value="860" />
-    <option name="height" value="785" />
+    <option name="x" value="5" />
+    <option name="y" value="130" />
+    <option name="width" value="1075" />
+    <option name="height" value="980" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -99,11 +170,94 @@
               <item name="symfonyGSB" type="b2602c69:ProjectViewProjectNode" />
               <item name="symfonyGSB" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="symfonyGSB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfonyGSB" type="462c0819:PsiDirectoryNode" />
+              <item name="gsb" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="symfonyGSB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfonyGSB" type="462c0819:PsiDirectoryNode" />
+              <item name="gsb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="symfonyGSB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfonyGSB" type="462c0819:PsiDirectoryNode" />
+              <item name="gsb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="acmjBundle" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="symfonyGSB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfonyGSB" type="462c0819:PsiDirectoryNode" />
+              <item name="gsb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="acmjBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="Controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="symfonyGSB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfonyGSB" type="462c0819:PsiDirectoryNode" />
+              <item name="gsb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="acmjBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="Form" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="symfonyGSB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfonyGSB" type="462c0819:PsiDirectoryNode" />
+              <item name="gsb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="acmjBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="Repository" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="symfonyGSB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfonyGSB" type="462c0819:PsiDirectoryNode" />
+              <item name="gsb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="acmjBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="symfonyGSB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfonyGSB" type="462c0819:PsiDirectoryNode" />
+              <item name="gsb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="acmjBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="symfonyGSB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfonyGSB" type="462c0819:PsiDirectoryNode" />
+              <item name="gsb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="acmjBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="Default" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="symfonyGSB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfonyGSB" type="462c0819:PsiDirectoryNode" />
+              <item name="gsb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="acmjBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="Service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="symfonyGSB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfonyGSB" type="462c0819:PsiDirectoryNode" />
+              <item name="gsb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="AppBundle" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -146,17 +300,19 @@
       <workItem from="1553518763310" duration="595000" />
       <workItem from="1553883585009" duration="5000" />
       <workItem from="1553895708536" duration="3000" />
+      <workItem from="1554101051584" duration="1255000" />
+      <workItem from="1554139912864" duration="3806000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5834000" />
+    <option name="totallyTimeSpent" value="10895000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="33" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22885907" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17583893" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -181,10 +337,54 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/gsb/src/acmjBundle/Controller/SecurityController.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gsb/src/acmjBundle/Resources/views/Default/consulter_fiche_frais.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="52" column="18" selection-start-line="52" selection-start-column="18" selection-end-line="52" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gsb/src/acmjBundle/Repository/FichefraisRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="37" column="10" selection-start-line="34" selection-start-column="7" selection-end-line="37" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gsb/src/acmjBundle/Form/LignefraisforfaitType.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gsb/src/acmjBundle/Form/FichefraisType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gsb/src/acmjBundle/Repository/LignefraisforfaitRepository.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/gsb/src/acmjBundle/Controller/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="92" column="61" selection-start-line="92" selection-start-column="61" selection-end-line="92" selection-end-column="61" />
+        <state relative-caret-position="303">
+          <caret line="181" column="48" selection-start-line="181" selection-start-column="48" selection-end-line="181" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gsb/src/acmjBundle/Service/GSBPdoService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="57" column="20" selection-start-line="57" selection-start-column="20" selection-end-line="57" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gsb/src/acmjBundle/Repository/LignefraishorsforfaitRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="37" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
         </state>
       </provider>
     </entry>
