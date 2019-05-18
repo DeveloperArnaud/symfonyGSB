@@ -14,7 +14,9 @@ class FichefraisRepositoryTest extends TestCase
     private $entityManager;
 
 
-
+    /**
+     * testDavid : Essai de test unitaire sur le repository "Visiteur"
+     */
     public function testDavid() {
         $employee = new Visiteur();
 

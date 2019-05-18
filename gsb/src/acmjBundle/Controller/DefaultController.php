@@ -17,7 +17,10 @@ use acmjBundle\Form\LignefraishorsforfaitType;
 use acmjBundle\Entity\Lignefraishorsforfait;
 use Symfony\Component\HttpFoundation\Response;
 
-
+/**
+ * Class DefaultController
+ * @package acmjBundle\Controller
+ */
 class DefaultController extends Controller
 {
     public function indexAction()
@@ -26,6 +29,7 @@ class DefaultController extends Controller
     }
 
     /**
+     * Action permettant au visiteur de saisir ces frais forfaits et hors forfaits
      * @param Request $request
      * @param $id
      * @return Response
@@ -204,6 +208,12 @@ class DefaultController extends Controller
 
     }
 
+    /**
+     * Action permettant au visiteur de consulter ces fiches de frais
+     * @param Request $request
+     * @param $id
+     * @return Response
+     */
 
 
     public function consulterFichefraisAction(Request $request,$id)
@@ -231,6 +241,12 @@ class DefaultController extends Controller
         
     }
 
+    /**
+     * Action permettant de supprimer les frais hors forfaits d'une fiche de frais d'un visiteur
+     * @param $idFraisHF
+     * @param $idVisiteur
+     * @return Response
+     */
 
     public function suppressionFraisHFAction($idFraisHF,$idVisiteur) {
         $repository = $this->getDoctrine()->getManager()->getRepository('acmjBundle:Fraisforfait');
@@ -252,6 +268,14 @@ class DefaultController extends Controller
 
     }
 
+    /**
+     * Action permettant de mettre a jour les frais forfaits d'une fiche d'un visiteur
+     * @param Request $request
+     * @param $idHF
+     * @param $id
+     * @return Response
+     */
+
     public function updateHFAction(Request $request,$idHF,$id) {
         $db = $this->get('gsb.pdo');
         $service = new GSBPdoService($db);
@@ -268,8 +292,15 @@ class DefaultController extends Controller
         $form2 =$this->createForm(LignefraisforfaitType::class);
         $message ="Le frais a bien été modifié";
         return $this->render('@acmj/Default/FicheFrais.html.twig', array('form'=>$form->createView(),'fraisforfaits'=>$fraisf,'visiteurs'=>$lesVisiteurs,'infosHF'=>$lesInfosHorsforfaits,"messageUpdate"=>$message,"update"=>$update,'formF'=>$form2->createView()));
-    } 
+    }
 
+    /**
+     * Action permettant de mettre a jour la quantité des frais forfaits d'une fiche d'un visiteur
+     * @param Request $request
+     * @param $idForfait
+     * @param $idVisiteur
+     * @return Response
+     */
     public function updateForfaitAction(Request $request,$idForfait,$idVisiteur) {
         $db = $this->get('gsb.pdo');
         $service = new GSBPdoService($db);
