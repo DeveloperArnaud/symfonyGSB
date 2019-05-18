@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * Visiteur
  *
- * @ORM\Table(name="visiteur", indexes={@ORM\Index(name="I_FK_VISITEUR_COMPTABLE", columns={"ID_GERER"})})
+ * @ORM\Table(name="visiteur")
  * @ORM\Entity(repositoryClass="acmjBundle\Repository\VisiteurRepository")
  */
 class Visiteur implements UserInterface,\Serializable
@@ -85,12 +85,7 @@ class Visiteur implements UserInterface,\Serializable
      */
     private $comptable;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="ID_GERER", type="integer", nullable=false)
-     */
-    private $idGerer;
+
 
 
     public function setUsername($loginvisiteur)
@@ -131,7 +126,7 @@ class Visiteur implements UserInterface,\Serializable
 
 
 
-     /**
+    /**
      * Returns the roles granted to the user.
      *
      *     public function getRoles()
@@ -437,32 +432,8 @@ class Visiteur implements UserInterface,\Serializable
         return $this->comptable;
     }
 
-    /**
-     * Set idGerer
-     *
-     * @param integer $idGerer
-     *
-     * @return Visiteur
-     */
-    public function setIdGerer($idGerer)
-    {
-        $this->idGerer = $idGerer;
-
-        return $this;
-    }
-
-    /**
-     * Get idGerer
-     *
-     * @return integer
-     */
-    public function getIdGerer()
-    {
-        return $this->idGerer;
-    }
-
     public function __toString()
     {
-        "nom ". $this->nomvisiteur;
+        return "nom ". $this->nomvisiteur;
     }
 }

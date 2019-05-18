@@ -3,11 +3,14 @@
 namespace acmjBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * Lignefraisforfait
  *
- * @ORM\Table(name="lignefraisforfait", indexes={@ORM\Index(name="I_FK_LIGNEFRAISFORFAIT_FRAISFORFAIT", columns={"ID_CONCERNER"}), @ORM\Index(name="I_FK_LIGNEFRAISFORFAIT_ETAT", columns={"ID_ETRE"})})
+ * @ORM\Table(name="lignefraisforfait", indexes={@ORM\Index(name="I_FK_LIGNEFRAISFORFAIT_FRAISFORFAIT", columns={"idFraisforfait"})})
  * @ORM\Entity(repositoryClass="acmjBundle\Repository\LignefraisforfaitRepository")
  */
 class Lignefraisforfait
@@ -22,22 +25,19 @@ class Lignefraisforfait
     private $id;
 
     /**
-     * @var string
+     * @var \Visiteur
      *
-     * @ORM\Column(name="ID_CONCERNER", type="string", length=128, nullable=false)
+     * @ORM\ManyToOne(targetEntity="Fraisforfait")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idFraisforfait", referencedColumnName="ID")
+     * })
      */
-    private $idConcerner;
+    private $idFraisforfait;
+
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="ID_ETRE", type="smallint", nullable=false)
-     */
-    private $idEtre;
-
-    /**
-     * @var integer
-     *
+     * @Assert\Regex("/^[0-9]{5}$/")
      * @ORM\Column(name="QUANTITE", type="bigint", nullable=true)
      */
     private $quantite;
@@ -49,13 +49,25 @@ class Lignefraisforfait
      */
     private $datemodification;
 
-        /**
-     * @var string
+    /**
+     * @var \Visiteur
      *
-     * @ORM\Column(name="idVisiteur", type="string", length=128, nullable=false)
+     * @ORM\ManyToOne(targetEntity="Visiteur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idVisiteur", referencedColumnName="ID")
+     * })
      */
-    private $idVisiteur;
+    private $idvisiteur;
 
+    /**
+     * @var \Fichefrais
+     *
+     * @ORM\ManyToOne(targetEntity="Fichefrais")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idFichefrais", referencedColumnName="id")
+     * })
+     */
+    private $idFichefrais;
 
 
 
@@ -67,54 +79,6 @@ class Lignefraisforfait
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set idConcerner
-     *
-     * @param string $idConcerner
-     *
-     * @return Lignefraisforfait
-     */
-    public function setIdConcerner($idConcerner)
-    {
-        $this->idConcerner = $idConcerner;
-
-        return $this;
-    }
-
-    /**
-     * Get idConcerner
-     *
-     * @return string
-     */
-    public function getIdConcerner()
-    {
-        return $this->idConcerner;
-    }
-
-    /**
-     * Set idEtre
-     *
-     * @param integer $idEtre
-     *
-     * @return Lignefraisforfait
-     */
-    public function setIdEtre($idEtre)
-    {
-        $this->idEtre = $idEtre;
-
-        return $this;
-    }
-
-    /**
-     * Get idEtre
-     *
-     * @return integer
-     */
-    public function getIdEtre()
-    {
-        return $this->idEtre;
     }
 
     /**
@@ -166,26 +130,74 @@ class Lignefraisforfait
     }
 
     /**
-     * Set idVisiteur
+     * Set idFraisforfait
      *
-     * @param string $idVisiteur
+     * @param \acmjBundle\Entity\Fraisforfait $idFraisforfait
      *
      * @return Lignefraisforfait
      */
-    public function setIdVisiteur($idVisiteur)
+    public function setIdFraisforfait(\acmjBundle\Entity\Fraisforfait $idFraisforfait = null)
     {
-        $this->idVisiteur = $idVisiteur;
+        $this->idFraisforfait = $idFraisforfait;
 
         return $this;
     }
 
     /**
-     * Get idVisiteur
+     * Get idFraisforfait
      *
-     * @return string
+     * @return \acmjBundle\Entity\Fraisforfait
      */
-    public function getIdVisiteur()
+    public function getIdFraisforfait()
     {
-        return $this->idVisiteur;
+        return $this->idFraisforfait;
+    }
+
+    /**
+     * Set idvisiteur
+     *
+     * @param \acmjBundle\Entity\Visiteur $idvisiteur
+     *
+     * @return Lignefraisforfait
+     */
+    public function setIdvisiteur(\acmjBundle\Entity\Visiteur $idvisiteur = null)
+    {
+        $this->idvisiteur = $idvisiteur;
+
+        return $this;
+    }
+
+    /**
+     * Get idvisiteur
+     *
+     * @return \acmjBundle\Entity\Visiteur
+     */
+    public function getIdvisiteur()
+    {
+        return $this->idvisiteur;
+    }
+
+    /**
+     * Set idFichefrais
+     *
+     * @param \acmjBundle\Entity\Fichefrais $idFichefrais
+     *
+     * @return Lignefraisforfait
+     */
+    public function setIdFichefrais(\acmjBundle\Entity\Fichefrais $idFichefrais = null)
+    {
+        $this->idFichefrais = $idFichefrais;
+
+        return $this;
+    }
+
+    /**
+     * Get idFichefrais
+     *
+     * @return \acmjBundle\Entity\Fichefrais
+     */
+    public function getIdFichefrais()
+    {
+        return $this->idFichefrais;
     }
 }

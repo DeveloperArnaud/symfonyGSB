@@ -109,7 +109,7 @@
 
   
 
-    
+      {% for infoHF in infosHF %}
     <table class="listeLegere">
         <h2>Descriptif des éléments hors forfait
         </h2>
@@ -119,7 +119,7 @@
             <th class="montant">Montant</th>
             <th class="action">&nbsp;</th>
         </tr>
-       {% for infoHF in infosHF %}
+
         <tr>
          {% if message is defined  %}
                 <div class ="erreur">
@@ -130,7 +130,7 @@
 
             {% endif %}
 
-            <td>{{ infoHF.DATE }} </td>
+            <td>{{ infoHF.DATE | date('d/m/Y')}} </td>
             <td> {{ infoHF.LIBELLE }} </td>
             <td> {{ infoHF.MONTANT }} </td>
             <td><a href= {{path('acmj_suppression_fiche',{idFraisHF: infoHF.ID, idVisiteur: app.user.id })}} onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">Supprimer</a></td>

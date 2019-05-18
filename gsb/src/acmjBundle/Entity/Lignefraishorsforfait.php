@@ -3,12 +3,13 @@
 namespace acmjBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Lignefraishorsforfait
  *
  * @ORM\Table(name="lignefraishorsforfait")
- * @ORM\Entity(repositoryClass="acmjBundle\Repository\LignefraishorsforfaitRepository")
+ * @ORM\Entity
  */
 class Lignefraishorsforfait
 {
@@ -30,14 +31,18 @@ class Lignefraishorsforfait
 
     /**
      * @var \DateTime
-     *
+     * @Assert\Range(
+     *      min = "2018/0/01",
+     *      max = "now",
+     *     minMessage="La date doit se situer dans l'année écoulée."
+     * )
      * @ORM\Column(name="DATE", type="date", nullable=true)
      */
     private $date;
 
     /**
      * @var string
-     *
+     * @Assert\Type(type="int")
      * @ORM\Column(name="MONTANT", type="decimal", precision=10, scale=2, nullable=true)
      */
     private $montant;
@@ -49,16 +54,23 @@ class Lignefraishorsforfait
      */
     private $datemodif;
 
+    /**
+     * @var \Visiteur
+     *
+     * @ORM\ManyToOne(targetEntity="Visiteur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idVisiteur", referencedColumnName="ID")
+     * })
+     */
+    private $idvisiteur;
 
     /**
-     * @var string
+     * @var \Fichefrais
      *
-     * @ORM\Column(name="idVisiteur", type="string", length=128, nullable=false)
-     */
-     private $idVisiteur;
-
-     /**
-     * @ORM\Column(name="idFichefrais", type="string", length=128, nullable=false)
+     * @ORM\ManyToOne(targetEntity="Fichefrais")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idFichefrais", referencedColumnName="id")
+     * })
      */
     private $idFichefrais;
 
@@ -74,102 +86,6 @@ class Lignefraishorsforfait
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set idEtre1
-     *
-     * @param integer $idEtre1
-     *
-     * @return Lignefraishorsforfait
-     */
-    public function setIdEtre1($idEtre1)
-    {
-        $this->idEtre1 = $idEtre1;
-
-        return $this;
-    }
-
-    /**
-     * Get idEtre1
-     *
-     * @return integer
-     */
-    public function getIdEtre1()
-    {
-        return $this->idEtre1;
-    }
-
-    /**
-     * Set id1
-     *
-     * @param integer $id1
-     *
-     * @return Lignefraishorsforfait
-     */
-    public function setId1($id1)
-    {
-        $this->id1 = $id1;
-
-        return $this;
-    }
-
-    /**
-     * Get id1
-     *
-     * @return integer
-     */
-    public function getId1()
-    {
-        return $this->id1;
-    }
-
-    /**
-     * Set id2
-     *
-     * @param integer $id2
-     *
-     * @return Lignefraishorsforfait
-     */
-    public function setId2($id2)
-    {
-        $this->id2 = $id2;
-
-        return $this;
-    }
-
-    /**
-     * Get id2
-     *
-     * @return integer
-     */
-    public function getId2()
-    {
-        return $this->id2;
-    }
-
-    /**
-     * Set id3
-     *
-     * @param integer $id3
-     *
-     * @return Lignefraishorsforfait
-     */
-    public function setId3($id3)
-    {
-        $this->id3 = $id3;
-
-        return $this;
-    }
-
-    /**
-     * Get id3
-     *
-     * @return integer
-     */
-    public function getId3()
-    {
-        return $this->id3;
     }
 
     /**
@@ -269,15 +185,39 @@ class Lignefraishorsforfait
     }
 
     /**
+     * Set idvisiteur
+     *
+     * @param \acmjBundle\Entity\Visiteur $idvisiteur
+     *
+     * @return Lignefraishorsforfait
+     */
+    public function setIdvisiteur(\acmjBundle\Entity\Visiteur $idvisiteur = null)
+    {
+        $this->idvisiteur = $idvisiteur;
+
+        return $this;
+    }
+
+    /**
+     * Get idvisiteur
+     *
+     * @return \acmjBundle\Entity\Visiteur
+     */
+    public function getIdvisiteur()
+    {
+        return $this->idvisiteur;
+    }
+
+    /**
      * Set idFichefrais
      *
      * @param \acmjBundle\Entity\Fichefrais $idFichefrais
      *
      * @return Lignefraishorsforfait
      */
-    public function setIdFichefrais($id)
+    public function setIdFichefrais(\acmjBundle\Entity\Fichefrais $idFichefrais = null)
     {
-        $this->idFichefrais = $id;
+        $this->idFichefrais = $idFichefrais;
 
         return $this;
     }
@@ -290,29 +230,5 @@ class Lignefraishorsforfait
     public function getIdFichefrais()
     {
         return $this->idFichefrais;
-    }
-
-    /**
-     * Set idVisiteur
-     *
-     * @param string $idVisiteur
-     *
-     * @return Lignefraishorsforfait
-     */
-    public function setIdVisiteur($idVisiteur)
-    {
-        $this->idVisiteur = $idVisiteur;
-
-        return $this;
-    }
-
-    /**
-     * Get idVisiteur
-     *
-     * @return string
-     */
-    public function getIdVisiteur()
-    {
-        return $this->idVisiteur;
     }
 }

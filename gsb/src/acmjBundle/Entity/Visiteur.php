@@ -84,7 +84,7 @@ class Visiteur implements UserInterface,\Serializable
      * @ORM\Column(name="COMPTABLE", type="boolean", nullable=true)
      */
     private $comptable;
-    
+
 
 
 
@@ -126,7 +126,7 @@ class Visiteur implements UserInterface,\Serializable
 
 
 
-     /**
+    /**
      * Returns the roles granted to the user.
      *
      *     public function getRoles()
@@ -434,6 +434,6 @@ class Visiteur implements UserInterface,\Serializable
 
     public function __toString()
     {
-        "nom ". $this->nomvisiteur;
+        return "nom ". $this->nomvisiteur;
     }
 }

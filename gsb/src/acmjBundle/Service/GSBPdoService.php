@@ -69,7 +69,7 @@ class GSBPdoService
 
     
     public function updateInfosForfait($id,$quantite) {
-        $sql= self::$db->exec("UPDATE lignefraisforfait SET QUANTITE='$quantite' where ID= $id ");
+        $sql= self::$db->exec("UPDATE lignefraisforfait SET QUANTITE='$quantite' where idFraisforfait= $id ");
        
         
 

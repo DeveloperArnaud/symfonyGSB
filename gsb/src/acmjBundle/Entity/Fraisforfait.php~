@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Fraisforfait
  *
  * @ORM\Table(name="fraisforfait")
- * @ORM\Entity(repositoryClass="acmjBundle\Repository\FraisforfaitRepository")
+ * @ORM\Entity
  */
 class Fraisforfait
 {
@@ -34,12 +34,6 @@ class Fraisforfait
      * @ORM\Column(name="MONTANT", type="decimal", precision=10, scale=2, nullable=true)
      */
     private $montant;
-
-
-    public function __toString()
-    {
-        return $this->libelle;
-    }
 
 
 }

@@ -43,22 +43,17 @@
                     <ul>{{msg}}</ul></div>
             {% endif %}
       <div class="corpsForm">
-        {% if infos is defined %}
-      {% for info in infos %} 
+
       <fieldset>
-      <legend> Votre fiche frais du mois {{ info.MOIS }}   </legend>
-     <h2> Etat : Fiche créée, saisie en cours </h2>
-          {% if size is defined %}
+          {% if infos is defined %}
+      <legend> Votre fiche frais du mois de {{ infos.mois }}   </legend>
+     <h2> Etat : {{ infos.idEtat.libelle }} </h2>
     <b> Nb justificatifs : {{size}}</b>
-          {% endif %}
-     {% endfor %}
+    {% endif %}
+
     <table class="listeLegere">
     <fieldset>
       <legend>Les élements hors forfait </legend>
-         {% if messageUpdate is defined  %}
-                <div class ="erreur">
-                    <ul>{{messageUpdate}}</ul></div>
-            {% endif %}
       </fieldset>
         <tr>
             <th class="date">Date</th>
@@ -70,8 +65,11 @@
         <div class ="erreur">
             <ul>{{msgHF}}</ul></div>
     {% endif %}
-    {% set total = 0 %}
+
+        {% set total = 0 %}
+        {% if infosHF is defined %}
        {% for infoHF in infosHF %}
+
         <tr>
         <form action={{path('acmj_updatefiche', {idHF : infoHF.id, id : app.user.id } )}} method= "POST" >
         
@@ -82,6 +80,7 @@
             <td><input type="submit"  name="submit" value="Modifier"></td>
             </form>
         {% endfor %}
+        {% endif %}
     </table>
     <fieldset>Total HF : {{total}} €  </fieldset>
 
@@ -89,7 +88,7 @@
         <br>
         <br>
         <br>
-        {% if infosFF1 is defined %}
+        {% if infosFF is defined %}
         <div class="corpsForm">
      <table class="listeLegere">
         <fieldset>
@@ -107,34 +106,30 @@
         {% set totalKM = 0 %}
         {% set totalNUI = 0 %}
         {% set totalREP = 0 %}
-    {% for infoFFor in infosFF1 %}
+    {% for infoFFor in infosFF %}
     <tr>
 <form action={{path('acmj_update_forfait',{idForfait : infoFFor.ID , idVisiteur: app.user.id })}} method="POST">
         <td>{{infoFFor.DATEMODIFICATION|date("d/m/Y")}} </td>
-        <td>{{infoFFor.ID_CONCERNER}}</td>
+        <td>{{infoFFor.idFraisforfait.libelle}}</td>
         <td><input type="text" name="quantite" placeholder={{infoFFor.QUANTITE}}></td>
         <td><input type="submit" value="Modifier" onclick="return confirm('Voulez-vous vraiment modifier ce frais ?');"></td>
     </form>
     </tr>
-    {% if infoFFor.ID_CONCERNER == "ETP" %}
+    {% if infoFFor.idFraisforfait.id == "ETP" %}
     {% set totalETP = 110.0 * infoFFor.QUANTITE %}
     {% endif %}
-    {% if infoFFor.ID_CONCERNER == "NUI" %}
+    {% if infoFFor.idFraisforfait.id == "NUI" %}
     {% set totalNUI = 80.00 * infoFFor.QUANTITE %}
     {% endif %}
-    {% if infoFFor.ID_CONCERNER == "KM" %}
+    {% if infoFFor.idFraisforfait.id == "KM" %}
     {% set totalKM = 0.62 * infoFFor.QUANTITE %}
     {% endif %}
-    {% if infoFFor.ID_CONCERNER == "REP" %}
-    {% set totalREP = 25.00 * infoFFor.QUANTITE %}
+    {% if infoFFor.idFraisforfait.id == "REP" %}
+    {% set totalREP = 25.00 * infoFFor.quantite %}
     {% endif %}
-{% endfor %} 
-<fieldset><b>Frais total de la fiche : {{ totalETP + totalNUI + totalKM + totalREP + total}} €  </b></fieldset>
+{% endfor %}
+            <fieldset><b>Frais total de la fiche : {{ totalETP + totalNUI + totalKM + totalREP + total}} €  </b></fieldset>
 {% endif %}
-    {% elseif msg is defined %}       
-     <div class ="erreur">
-                    <ul>{{msg}}</ul></div>
-      {% endif %}
       </table>
       </fieldset>
 

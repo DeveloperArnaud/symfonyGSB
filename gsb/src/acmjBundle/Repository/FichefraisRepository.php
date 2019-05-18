@@ -38,7 +38,7 @@ class FichefraisRepository extends \Doctrine\ORM\EntityRepository
         );
 
         $query = $this->createQueryBuilder('f')
-                        ->where('f.idDeclarer = :idVisiteur')
+                        ->where('f.idvisiteur = :idVisiteur')
                         ->andWhere('f.mois = :mois')
                         ->setParameters($parameters)
                         ->getQuery()
@@ -48,6 +48,8 @@ class FichefraisRepository extends \Doctrine\ORM\EntityRepository
                         
                     
         }
+
+
 
 
 }

@@ -3,11 +3,12 @@
 namespace acmjBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Fichefrais
  *
- * @ORM\Table(name="fichefrais", indexes={@ORM\Index(name="I_FK_FICHEFRAIS_ETAT", columns={"ID_ETRE2"}), @ORM\Index(name="I_FK_FICHEFRAIS_VISITEUR", columns={"ID_DECLARER"})})
+ * @ORM\Table(name="fichefrais", indexes={@ORM\Index(name="fichefrais_ibfk_1", columns={"idEtat"}), @ORM\Index(name="fichefrais_ibfk_2", columns={"idVisiteur"})})
  * @ORM\Entity(repositoryClass="acmjBundle\Repository\FichefraisRepository")
  */
 class Fichefrais
@@ -15,61 +16,59 @@ class Fichefrais
     /**
      * @var integer
      *
-     * @ORM\Column(name="ID", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="ID_ETRE2", type="smallint", nullable=false)
-     */
-    private $idEtre2;
-
-    /**
      * @var string
      *
-     * @ORM\Column(name="ID_DECLARER", type="string", length=128, nullable=false)
-     */
-    private $idDeclarer;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="MOIS", type="string", length=6, nullable=true)
+     * @ORM\Column(name="mois", type="string", length=6, nullable=false)
      */
     private $mois;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="NBJUSTIFICATIFS", type="integer", nullable=true)
+     * @ORM\Column(name="nbJustificatifs", type="integer", nullable=true)
      */
     private $nbjustificatifs;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="MONTANTVALIDE", type="decimal", precision=10, scale=2, nullable=true)
+     * @ORM\Column(name="montantValide", type="decimal", precision=10, scale=2, nullable=true)
      */
     private $montantvalide;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="DATEMODIF", type="date", nullable=true)
+     * @ORM\Column(name="dateModif", type="date", nullable=true)
      */
     private $datemodif;
 
+    /**
+     * @var \Etat
+     *
+     * @ORM\ManyToOne(targetEntity="Etat")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idEtat", referencedColumnName="id")
+     * })
+     */
+    private $idetat;
 
     /**
-     * @ORM\OneToMany(targetEntity="acmjBundle\Entity\Lignefraishorsforfait", mappedBy="idFichefrais")
+     * @var \Visiteur
+     *
+     * @ORM\ManyToOne(targetEntity="Visiteur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idVisiteur", referencedColumnName="ID")
+     * })
      */
-    private $lignefraisHF;
-
-
+    private $idvisiteur;
 
 
 
@@ -81,54 +80,6 @@ class Fichefrais
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set idEtre2
-     *
-     * @param integer $idEtre2
-     *
-     * @return Fichefrais
-     */
-    public function setIdEtre2($idEtre2)
-    {
-        $this->idEtre2 = $idEtre2;
-
-        return $this;
-    }
-
-    /**
-     * Get idEtre2
-     *
-     * @return integer
-     */
-    public function getIdEtre2()
-    {
-        return $this->idEtre2;
-    }
-
-    /**
-     * Set idDeclarer
-     *
-     * @param string $idDeclarer
-     *
-     * @return Fichefrais
-     */
-    public function setIdDeclarer($idDeclarer)
-    {
-        $this->idDeclarer = $idDeclarer;
-
-        return $this;
-    }
-
-    /**
-     * Get idDeclarer
-     *
-     * @return string
-     */
-    public function getIdDeclarer()
-    {
-        return $this->idDeclarer;
     }
 
     /**
@@ -227,12 +178,51 @@ class Fichefrais
         return $this->datemodif;
     }
 
-    public function __toString()
+    /**
+     * Set idetat
+     *
+     * @param \acmjBundle\Entity\Etat $idetat
+     *
+     * @return Fichefrais
+     */
+    public function setIdetat(\acmjBundle\Entity\Etat $idetat = null)
     {
-        
-            return $this->mois;
-        
-       
+        $this->idetat = $idetat;
+
+        return $this;
     }
-    
+
+    /**
+     * Get idetat
+     *
+     * @return \acmjBundle\Entity\Etat
+     */
+    public function getIdetat()
+    {
+        return $this->idetat;
+    }
+
+    /**
+     * Set idvisiteur
+     *
+     * @param \acmjBundle\Entity\Visiteur $idvisiteur
+     *
+     * @return Fichefrais
+     */
+    public function setIdvisiteur(\acmjBundle\Entity\Visiteur $idvisiteur = null)
+    {
+        $this->idvisiteur = $idvisiteur;
+
+        return $this;
+    }
+
+    /**
+     * Get idvisiteur
+     *
+     * @return \acmjBundle\Entity\Visiteur
+     */
+    public function getIdvisiteur()
+    {
+        return $this->idvisiteur;
+    }
 }

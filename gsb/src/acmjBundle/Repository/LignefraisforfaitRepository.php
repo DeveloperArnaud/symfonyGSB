@@ -20,7 +20,7 @@ class LignefraisforfaitRepository extends \Doctrine\ORM\EntityRepository
 
         $query = $this->createQueryBuilder('f')
         ->select('f')
-        ->Where('f.idVisiteur = :idVisiteur')
+        ->Where('f.idvisiteur = :idVisiteur')
         ->andWhere('f.datemodification = :dateModif')
         ->setParameters($parameters)
         ->getQuery()
@@ -37,7 +37,7 @@ class LignefraisforfaitRepository extends \Doctrine\ORM\EntityRepository
 
         $query = $this->createQueryBuilder('f')
         ->select('f')
-        ->Where('f.idVisiteur = :idVisiteur')
+        ->Where('f.idvisiteur = :idVisiteur')
         ->andWhere('f.datemodification LIKE :dateModif')
         ->setParameters($parameters)
         ->getQuery()

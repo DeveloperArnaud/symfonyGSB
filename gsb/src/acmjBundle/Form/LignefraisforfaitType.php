@@ -20,13 +20,13 @@ class LignefraisforfaitType extends AbstractType
     {
         $builder->add('ETP',IntegerType::class,array(
             'label' => 'Forfait Etape',
-            'attr'=> array('placeholder' => '               €')))
+            'attr'=> array('placeholder' =>0)))
             ->add('KM',IntegerType::class,array (
-            'label'=> 'Forfait kilométrique','attr'=>array('placeholder'=> '               €')))
+            'label'=> 'Forfait kilométrique','attr'=>array('placeholder'=> 0)))
             ->add('NUI',IntegerType::class,array(
-            'label'=>'Nuitée Hôtel','attr'=> array('placeholder'=> '               €')))
+            'label'=>'Nuitée Hôtel','attr'=> array('placeholder'=>0)))
             ->add('REP',IntegerType::class,array(
-            'label'=>'Repas Restaurant','attr'=>array('placeholder'=>'               €')))
+            'label'=>'Repas Restaurant','attr'=>array('placeholder'=>0)))
             ->add('save',SubmitType::class,array('label'=> 'Valider'))
             ->add('reset',ResetType::class,array('label'=> 'Effacer'));
     }/**
